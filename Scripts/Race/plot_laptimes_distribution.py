@@ -7,6 +7,7 @@ import fastf1
 import fastf1.plotting
 import seaborn as sns
 from matplotlib import pyplot as plt
+import dirOrg
 
 def LaptimesDistributionFunc(y,r,e):
 
@@ -82,6 +83,13 @@ def LaptimesDistributionFunc(y,r,e):
     plt.suptitle("Lap Time Distributions")
     sns.despine(left=True, bottom=True)
 
-    plt.tight_layout()
-    plt.savefig('Lap distribution')
+    plt.suptitle('Laptimes distribution\n' + race.event['EventName'] + ' ' + race.name)
+
+    dirOrg.checkForFolder(race.event['EventName'])
+    plt.savefig("plots/" + race.event['EventName'] + '/' + 'Laptimes distribution ' + race.name + '.png')
+
+
+    #plt.tight_layout()
     plt.show()
+
+    #DONE

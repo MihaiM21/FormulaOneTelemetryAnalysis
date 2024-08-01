@@ -8,6 +8,7 @@ import fastf1
 import fastf1.plotting
 import seaborn as sns
 from matplotlib import pyplot as plt
+import dirOrg
 
 def DriverLaptimesFunc(y,r,e,d):
 
@@ -60,6 +61,12 @@ def DriverLaptimesFunc(y,r,e,d):
     plt.grid(color='w', which='major', axis='both')
     sns.despine(left=True, bottom=True)
 
-    plt.tight_layout()
-    plt.savefig('Driver Laptimes')
+    plt.suptitle(d + ' Laptimes\n' + race.event['EventName'] + ' ' + race.name)
+
+    dirOrg.checkForFolder(race.event['EventName'])
+    plt.savefig("plots/" + race.event['EventName'] + '/' + d + ' Laptimes ' + race.name + '.png')
+
+    #plt.tight_layout()
     plt.show()
+
+    #DONE
