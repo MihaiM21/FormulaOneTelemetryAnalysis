@@ -1,4 +1,6 @@
+import tkinter as tk
 import customtkinter
+from PIL import Image
 from Scripts.Quali.Throttle_comparison import ThrottleComp
 from Scripts.Quali.plot_qualifying_results import QualiResults
 from Scripts.Quali.top_speed_plot import TopSpeedFunc
@@ -115,6 +117,7 @@ def runFile():
 
 customtkinter.set_appearance_mode("dark")
 
+
 # Setting the current year and making a list of years to choose from 2000 till present
 year_list = []
 x = 2019
@@ -144,14 +147,19 @@ file_names = ["Throttle comparison",
 event_type = ["FP1", "FP2", "FP3", "SQ", "S", "Q", "R"]
 
 # Creating window
-root = customtkinter.CTk()
-root.title("Formula One Telemetry Graphs")
-
+root = customtkinter.CTk(fg_color="#262525")
+root.title("Formula One Telemetry Analysis - FOTA")
 root.geometry("1280x720")
+root.iconbitmap("lib\logo32.ico")
+
+image = tk.PhotoImage(file="lib\logo32.png")
+root.iconphoto(True, image, image)
+
 
 # Creating frame
-frame = customtkinter.CTkFrame(master=root)
+frame = customtkinter.CTkFrame(master=root, fg_color="#262525", border_width=2)
 frame.pack(pady=20, padx=20, fill="none", expand=False)
+
 
 # Frame for selected driver info and team information
 frame2 = customtkinter.CTkFrame(master=frame, height=70)
@@ -215,5 +223,6 @@ labelT2 = customtkinter.CTkLabel(master=frame2, text="Team 2:")
 # Label with you must select a certain event type
 labelForQ = customtkinter.CTkLabel(master=frame2, text="You must select Q")
 labelForQFP = customtkinter.CTkLabel(master=frame2, text="You must select Q, FP1, FP2 or FP3")
+
 
 root.mainloop()
