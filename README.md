@@ -93,6 +93,13 @@ python3 program.py
 4. **Access Results**:  
    The generated plot will be saved in the `plots` folder, where you can review and analyze it at your convenience. Each file will be named according to the selected event, making it easy to organize and compare multiple data sets.
 
+## Examples of plots generated with FOTA:
+<p align=center>
+   <img src="plots/Chinese Grand Prix/Throttle comparison Qualifying.png" width="800">
+   <img src="plots/Canadian Grand Prix/Throttle_graph.png" width="800">
+   <img src="plots/Spanish Grand Prix/Track comparison.png" width="800">
+</p>
+
 ---
 
 <p align=center>
