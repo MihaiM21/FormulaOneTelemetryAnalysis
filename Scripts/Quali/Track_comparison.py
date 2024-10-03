@@ -144,7 +144,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
 
     dirOrg.checkForFolder(quali.event['EventName'])
-    plt.savefig("plots/" + quali.event['EventName']+"/"+"Track comparison")
+    plt.savefig("plots/" + quali.event['EventName']+"/"+"Track comparison "+ quali.name + '.png')
 
     # Printing speed
     print_sector_times(laps_driver1.pick_fastest(), driver1)
@@ -152,5 +152,6 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
 
 
-    plt.show()
-# WORKING WITH PROGRAM
+     # plt.show()
+    return "plots/" + quali.event['EventName'] + '/' + 'Track comparison ' + quali.name + '.png'
+# WORKING WITH PROGRAM and image view

@@ -77,7 +77,7 @@ def runFile():
 
     if selectedPlot.get() == 'Drivers track comparison' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'R' or selectedEvent.get() == 'FP3'):
-        TrackCompFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
+        img_path = TrackCompFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
                       entryDriverTwo.get(), entryTeamOne.get(), entryTeamTwo.get())
         
     elif selectedPlot.get() == "Drivers track comparison" and (
