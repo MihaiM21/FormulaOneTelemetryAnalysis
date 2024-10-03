@@ -21,6 +21,7 @@
 - [How to Use](#how-to-use)
 - [Future Plans](#about-fota)
 - [Contact & Support](#powered-by-turnoneofficial)
+- [Examples](#examples-of-plots-generated-with-fota)
 
 ---
 

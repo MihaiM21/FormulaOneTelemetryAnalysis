@@ -55,7 +55,7 @@ def runFile():
     ShowFrame
     if selectedPlot.get() == 'Throttle comparison' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
-        ThrottleComp(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+        img_path = ThrottleComp(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
     elif selectedPlot.get() == "Throttle comparison" and (
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):
         labelForQFP.pack(pady=20, padx=20)
@@ -102,7 +102,14 @@ def runFile():
         DriverLaptimesFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get())
 
     if selectedPlot.get() == "Throttle Graphs":
-        throttle_graph(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get(), entryDriverTwo.get())
+        img_path = throttle_graph(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get(), entryDriverTwo.get())
+
+
+    #Showing the plot
+    plot = customtkinter.CTkImage(light_image=Image.open(img_path),
+                                  dark_image=Image.open(img_path),size=(680,680))
+    plot_label = customtkinter.CTkLabel(root, image=plot, text="", justify="center")
+    plot_label.pack(padx=20, pady=20, fill="both")
 
     confirmButton.forget()
     entryDriverOne.forget()
@@ -144,26 +151,31 @@ file_names = ["Throttle comparison",
               "Drivers laptimes distribution",
               "Driver Laptimes",
               "Throttle Graphs"]
+
 event_type = ["FP1", "FP2", "FP3", "SQ", "S", "Q", "R"]
+event_type_FP = ["FP1", "FP2", "FP3"]
+event_type_Q = ["SQ", "Q"]
+event_type_R = ["S", "R"]
 
 # Creating window
 root = customtkinter.CTk(fg_color="#262525")
 root.title("Formula One Telemetry Analysis - FOTA")
 root.geometry("1280x720")
-root.iconbitmap("lib\logo32.ico")
 
+# Window icon
+root.iconbitmap("lib\logo32.ico")
 image = tk.PhotoImage(file="lib\logo32.png")
 root.iconphoto(True, image, image)
 
 
 # Creating frame
 frame = customtkinter.CTkFrame(master=root, fg_color="#262525", border_width=2)
-frame.pack(pady=20, padx=20, fill="none", expand=False)
+frame.pack(pady=20, padx=20, fill="y", expand=False, side="left")
 
 
 # Frame for selected driver info and team information
-frame2 = customtkinter.CTkFrame(master=frame, height=70)
-frame2.pack(pady=5, padx=10, fill='both', expand=False, side="right")
+frame2 = customtkinter.CTkFrame(master=root, fg_color="#262525", border_width=2)
+frame2.pack(pady=20, fill='y', expand=False, side="left")
 
 # Creating frames for every options menu
 f1 = customtkinter.CTkFrame(master=frame)
@@ -178,37 +190,43 @@ f4.pack(pady=5, padx=5)
 # Options menu for scrips
 selectPlotText = customtkinter.CTkLabel(master=f1, text="Select plot:", justify="center")
 selectedPlot = customtkinter.StringVar(master=f1)
-Options = customtkinter.CTkOptionMenu(master=f1, values=file_names, variable=selectedPlot , width=200)
+Options = customtkinter.CTkOptionMenu(master=f1, values=file_names, variable=selectedPlot , width=200, fg_color="#262525"
+                                      ,button_color="#ff2b2a", button_hover_color="#e02222", dropdown_fg_color="#262525")
 selectPlotText.pack(padx=1, pady=1)
 Options.pack(pady=10, padx=10)
 
 # Options menu for years
 selectedYear = customtkinter.StringVar(master=f2)
 selectYearText = customtkinter.CTkLabel(master=f2, text='Select year:')
-yearOptions = customtkinter.CTkOptionMenu(master=f2, values=year_list, variable=selectedYear, width=200)
+yearOptions = customtkinter.CTkOptionMenu(master=f2, values=year_list, variable=selectedYear, width=200, fg_color="#262525"
+                                      ,button_color="#ff2b2a", button_hover_color="#e02222")
 selectYearText.pack(padx=1, pady=1)
 yearOptions.pack(pady=10, padx=10)
 
 # Options menu for round number
 selectedRound = customtkinter.StringVar(master=f3)
 selectRoundNumberText = customtkinter.CTkLabel(master=f3, text='Select race number:')
-roundOptions = customtkinter.CTkOptionMenu(master=f3, values=rounds, variable=selectedRound, width=200)
+roundOptions = customtkinter.CTkOptionMenu(master=f3, values=rounds, variable=selectedRound, width=200, fg_color="#262525"
+                                      ,button_color="#ff2b2a", button_hover_color="#e02222")
 selectRoundNumberText.pack(padx=1, pady=1)
 roundOptions.pack(pady=10, padx=10)
 
 # Options menu for event type
 selectedEvent = customtkinter.StringVar(master=f4)
 selectEventText = customtkinter.CTkLabel(master=f4, text='Select event:')
-eventOptions = customtkinter.CTkOptionMenu(master=f4, values=event_type, variable=selectedEvent, width=200)
+eventOptions = customtkinter.CTkOptionMenu(master=f4, values=event_type, variable=selectedEvent, width=200, fg_color="#262525"
+                                      ,button_color="#ff2b2a", button_hover_color="#e02222")
 selectEventText.pack(padx=1, pady=1)
 eventOptions.pack(pady=10, padx=10)
 
 # Select Button
-button = customtkinter.CTkButton(master=frame, text="Select", command=ShowFrame, text_color="black")
+button = customtkinter.CTkButton(master=frame, text="Select", command=ShowFrame, text_color="black", fg_color="#ff2b2a",
+                                 hover_color="#e02222")
 button.pack(pady=10, padx=10)
 
 # Confirm/Execute button
-confirmButton = customtkinter.CTkButton(master=frame2, text="EXECUTE", command=runFile)
+confirmButton = customtkinter.CTkButton(master=frame2, text="EXECUTE", command=runFile, fg_color="#ff2b2a",
+                                 hover_color="#e02222")
 
 # Driver inputs for some scrips who need it
 entryDriverOne = customtkinter.CTkEntry(master=frame2, placeholder_text="Enter driver 1 acronim")
@@ -223,6 +241,7 @@ labelT2 = customtkinter.CTkLabel(master=frame2, text="Team 2:")
 # Label with you must select a certain event type
 labelForQ = customtkinter.CTkLabel(master=frame2, text="You must select Q")
 labelForQFP = customtkinter.CTkLabel(master=frame2, text="You must select Q, FP1, FP2 or FP3")
+
 
 
 root.mainloop()

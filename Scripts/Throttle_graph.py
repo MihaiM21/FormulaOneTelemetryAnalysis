@@ -82,3 +82,4 @@ def throttle_graph(y,r,e,d1,d2):
     plt.savefig("plots/" + race.event['EventName'] + "/" + "Throttle_graph.png")
 
     # WORKING WITH PROGRAM
+    return "plots/" + race.event['EventName'] + "/" + "Throttle_graph.png"
