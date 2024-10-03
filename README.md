@@ -30,9 +30,9 @@
 The **Formula One Telemetry Analysis** (FOTA) application is designed to process and visualize telemetry data from Formula One cars. This tool allows users to generate insightful plots and graphs that provide a deep understanding of performance metrics such as speed, throttle, braking, and sector times. FOTA is built with simplicity in mind but aims to become a comprehensive telemetry analysis suite in the future. 
 
 Planned future updates include:
-- **Enhanced Graphing Options**: More customizable data visualizations.
-- **Expanded Platform Support**: Developing dedicated apps for Android and Windows platforms with user-friendly GUIs.
-- **Advanced Features**: Additional functionalities like comparative analysis between drivers or races, lap-by-lap breakdowns, and real-time data tracking (subject to availability).
+- [ ] **Enhanced Graphing Options**: More customizable data visualizations.
+- [ ] **Expanded Platform Support**: Developing dedicated apps for Android and Windows platforms with user-friendly GUIs.
+- [ ] **Advanced Features**: Additional functionalities like comparative analysis between drivers or races, lap-by-lap breakdowns, and real-time data tracking (subject to availability).
 
 Whether you're a Formula One enthusiast, a data analyst, or a racing engineer, FOTA offers a powerful way to dive into the rich data of the sport.
 
@@ -76,7 +76,6 @@ python3 program.py
 
 1. **Run the Application**:  
    Start the program by executing `program.py` through a Python environment or command line.
-
 2. **Select the Parameters**:  
    Choose from the following options:
    - **Year**: Select the specific season you want data from.
