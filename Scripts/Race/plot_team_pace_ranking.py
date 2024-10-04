@@ -1,23 +1,17 @@
-"""Team Pace Comparison
-=============================================
-Rank team's race pace from the fastest to the slowest.
-"""
+
 
 import fastf1
 import fastf1.plotting
 import seaborn as sns
 from matplotlib import pyplot as plt
+import dirOrg
 
-# activate the fastf1 color scheme (and no other modifications)
+
 fastf1.plotting.setup_mpl(mpl_timedelta_support=False, misc_mpl_mods=False)
 
 def TeamPaceRankingFunc(y,r,e):
 
 
-    ###############################################################################
-    # Load the race session.
-    # Pick all quick laps (within 107% of fastest lap).
-    # For races with mixed conditions, pick_wo_box() is better.
     year = y
     event = r
     tip = e
@@ -67,5 +61,9 @@ def TeamPaceRankingFunc(y,r,e):
     # x-label is redundant
     ax.set(xlabel=None)
     plt.tight_layout()
-    plt.savefig('Team pace')
-    plt.show()
+    plt.suptitle(f"Team pace {race.event['EventName']} {race.event.year}")
+
+    dirOrg.checkForFolder(race.event['EventName'])
+    plt.savefig("plots/" + race.event['EventName'] + "/" + "Team pace " + race.name + '.png')
+
+    return "plots/" + race.event['EventName'] + "/" + "Team pace " + race.name + '.png'

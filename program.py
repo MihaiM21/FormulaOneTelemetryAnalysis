@@ -93,7 +93,7 @@ def runFile():
         labelForQFP.pack(pady=20, padx=20)
 
     if selectedPlot.get() == "Team Pace" and (selectedEvent.get() == 'S' or selectedEvent.get() == "R"):
-        TeamPaceRankingFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+        img_path = TeamPaceRankingFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
     if selectedPlot.get() == "Drivers laptimes distribution" and selectedEvent.get() == 'R':
         LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
