@@ -135,8 +135,8 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
 
     cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
-    #cbar.set_ticks(np.arange(1, 4))  # .5
-    #cbar.set_ticklabels(['VER', 'HAM'])
+    cbar.set_ticks(np.arange(1.5, 3.5))
+    cbar.set_ticklabels([driver1, driver2])
 
 
 
