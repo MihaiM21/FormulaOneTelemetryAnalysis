@@ -1,51 +1,33 @@
-"""
-Tyre strategies during a race
-=============================
 
-Plot all drivers' tyre strategies during a race.
-"""
 
 import fastf1
 import fastf1.plotting
 from matplotlib import pyplot as plt
+import dirOrg
 
-
-def StrategyFunc(y,r,e):    
-    ###############################################################################
-    # Load the race session
+def StrategyFunc(y,r,e):
 
     session = fastf1.get_session(y, r, e)
     session.load()
     laps = session.laps
 
-    ###############################################################################
-    # Get the list of driver numbers
     drivers = session.drivers
     print(drivers)
 
-    ###############################################################################
-    # Convert the driver numbers to three letter abbreviations
+
     drivers = [session.get_driver(driver)["Abbreviation"] for driver in drivers]
     print(drivers)
 
-    ###############################################################################
-    # We need to find the stint length and compound used
-    # for every stint by every driver.
-    # We do this by first grouping the laps by the driver,
-    # the stint number, and the compound.
-    # And then counting the number of laps in each group.
+
     stints = laps[["Driver", "Stint", "Compound", "LapNumber"]]
     stints = stints.groupby(["Driver", "Stint", "Compound"])
     stints = stints.count().reset_index()
 
-    ###############################################################################
-    # The number in the LapNumber column now stands for the number of observations
-    # in that group aka the stint length.
+
     stints = stints.rename(columns={"LapNumber": "StintLength"})
     print(stints)
 
-    ###############################################################################
-    # Now we can plot the strategies for each driver
+
     fig, ax = plt.subplots(figsize=(10, 10))
 
     for driver in drivers:
@@ -70,7 +52,7 @@ def StrategyFunc(y,r,e):
 
     ###############################################################################
     # Make the plot more readable and intuitive
-    plt.title("Strategy")
+    # plt.title("Strategy")
     plt.xlabel("Lap Number")
     plt.grid(False)
     # invert the y-axis so drivers that finish higher are closer to the top
@@ -85,5 +67,11 @@ def StrategyFunc(y,r,e):
     ax.spines['left'].set_visible(False)
 
     plt.tight_layout()
-    plt.savefig('Drivers tyre strategy')
-    plt.show()
+    #plt.show()
+
+    plt.suptitle(f"Drivers tyre strategy {session.event['EventName']} {session.event.year}")
+
+    dirOrg.checkForFolder(session.event['EventName'])
+    plt.savefig("plots/" + session.event['EventName'] + "/" + "Drivers tyre strategy " + session.name + '.png')
+
+    return "plots/" + session.event['EventName'] + "/" + "Drivers tyre strategy " + session.name + '.png'

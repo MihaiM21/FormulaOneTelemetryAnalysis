@@ -18,7 +18,6 @@ from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 from timple.timedelta import strftimedelta
 import sys
 import dirOrg
-#from program import selectedEvent, selectedRound, selectedYear
 
 def ThrottleComp(y,r,e):  
 

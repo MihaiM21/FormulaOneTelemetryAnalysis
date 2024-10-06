@@ -73,7 +73,7 @@ def runFile():
         labelForQFP.pack(pady=20, padx=20)
 
     if selectedPlot.get() == 'Strategy' and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
-        StrategyFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+        img_path = StrategyFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
     if selectedPlot.get() == 'Drivers track comparison' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'R' or selectedEvent.get() == 'FP3'):
@@ -107,9 +107,9 @@ def runFile():
 
     #Showing the plot
     plot = customtkinter.CTkImage(light_image=Image.open(img_path),
-                                  dark_image=Image.open(img_path),size=(680,680))
-    plot_label = customtkinter.CTkLabel(root, image=plot, text="", justify="center")
-    plot_label.pack(padx=20, pady=20, fill="both")
+                                  dark_image=Image.open(img_path), size=(650,650))
+    plot_label = customtkinter.CTkLabel(master=img_frame, image=plot, text="", justify="center")
+    plot_label.pack(padx=20, pady=20, fill="both", expand = True)
 
     confirmButton.forget()
     entryDriverOne.forget()
@@ -175,7 +175,10 @@ frame.pack(pady=20, padx=20, fill="y", expand=False, side="left")
 
 # Frame for selected driver info and team information
 frame2 = customtkinter.CTkFrame(master=root, fg_color="#262525", border_width=2)
-frame2.pack(pady=20, fill='y', expand=False, side="left")
+frame2.pack(pady=20, padx=0 ,fill='y', expand=False, side="left")
+
+img_frame = customtkinter.CTkFrame(master=root, fg_color="#262525", border_width=2)
+img_frame.pack(pady=20, padx=20, fill='both', expand=True, side="left")
 
 # Creating frames for every options menu
 f1 = customtkinter.CTkFrame(master=frame)
