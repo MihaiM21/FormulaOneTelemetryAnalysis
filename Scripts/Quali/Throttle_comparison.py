@@ -64,7 +64,9 @@ def ThrottleComp(y,r,e):
     string_telemetry.reverse()
     fig, ax = plt.subplots(figsize=(13, 13), layout='constrained')
     ax.bar(drivers, list_telemetry, color = list_colors)
-    ax.set(ylim=(0, 100), yticks=np.linspace(0, 100, 11))
+    # ax.set(ylim=(0, 100), yticks=np.linspace(0, 100, 11))
+    ax.set_ylim(50, 100)
+    plt.yticks(range(50, 101, 5))
 
     x=0
     for drv in drivers:
