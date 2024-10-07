@@ -48,14 +48,12 @@ def TopSpeedFunc(y, r, e):
     ax.bar(teams, list_top_speed, color=list_colors)
 
     # Set Y-axis limits and ticks
-    ax.set_ylim(0, 400)  # Optional, ensures Y-axis goes from 0 to 350
-    plt.yticks(range(0, 401, 50))  # Set Y-axis ticks from 0 to 350 in increments of 50
+    ax.set_ylim(300, 350)
+    plt.yticks(range(300, 351,5))
 
 
     x = 0
     for tms in teams:
-        telemetry2 = session.laps.pick_team(tms).pick_fastest().get_car_data()
-        speed2 = max(telemetry['Speed'])
 
         ax.text(tms, list_top_speed[x] + 1, str(list_top_speed[x]) + 'km/h', verticalalignment='bottom',
                 horizontalalignment='center', color='white', fontsize = 16, fontweight = "bold")
