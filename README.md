@@ -95,9 +95,10 @@ python3 program.py
 
 ## Examples of plots generated with FOTA:
 <p align=center>
-   <img src="plots/Chinese Grand Prix/Throttle comparison Qualifying.png" width="800">
-   <img src="plots/Canadian Grand Prix/Throttle_graph.png" width="800">
+   <img src="plots/Belgian Grand Prix/Throttle comparison Qualifying.png" width="800">
+   <img src="plots/Belgian Grand Prix/Throttle_graph.png" width="800">
    <img src="plots/Spanish Grand Prix/Track comparison.png" width="800">
+    <img src="plots/Belgian Grand Prix/Top speed comparison Qualifying" width="800">
 </p>
 
 ---
