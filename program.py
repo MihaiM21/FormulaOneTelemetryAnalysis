@@ -67,7 +67,7 @@ def runFile():
 
     if selectedPlot.get() == 'Top Speed' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'R' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
-        TopSpeedFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+        img_path = TopSpeedFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
     elif selectedPlot.get() == "Top Speed" and (
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'R' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):
         labelForQFP.pack(pady=20, padx=20)
@@ -107,7 +107,7 @@ def runFile():
 
     #Showing the plot
     plot = customtkinter.CTkImage(light_image=Image.open(img_path),
-                                  dark_image=Image.open(img_path), size=(650,650))
+                                  dark_image=Image.open(img_path), size=(620,620))
     plot_label = customtkinter.CTkLabel(master=img_frame, image=plot, text="", justify="center")
     plot_label.pack(padx=20, pady=20, fill="both", expand = True)
 

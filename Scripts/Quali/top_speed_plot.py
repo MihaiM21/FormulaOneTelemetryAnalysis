@@ -1,22 +1,10 @@
-import fastf1 as ff1
+
 import fastf1
 from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
-from matplotlib.collections import LineCollection
-from matplotlib import cm
-import seaborn as sns
-from matplotlib import pyplot as plt
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib as mpl
 import fastf1.plotting
-from fastf1.core import Laps
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from timple.timedelta import strftimedelta
-
+import dirOrg
 
 def TopSpeedFunc(y, r, e):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
@@ -39,12 +27,14 @@ def TopSpeedFunc(y, r, e):
         list_top_speed.append(speed)
         string_top_speed.append(str(speed))
 
+
     list_colors = list()
     for tms in teams:
         teamcolor = fastf1.plotting.team_color(tms)
         list_colors.append(teamcolor)
 
     list_top_speed, teams, list_colors = (list(t) for t in zip(*sorted(zip(list_top_speed, teams, list_colors))))
+
 
     string_top_speed.sort()
     list_top_speed.reverse()
@@ -54,9 +44,12 @@ def TopSpeedFunc(y, r, e):
     print(list_top_speed)
     print(teams)
 
-
     fig, ax = plt.subplots(figsize=(13, 13), layout='constrained')
-    ax.bar(teams, list_top_speed, color=list_colors,)
+    ax.bar(teams, list_top_speed, color=list_colors)
+
+    # Set Y-axis limits and ticks
+    ax.set_ylim(0, 400)  # Optional, ensures Y-axis goes from 0 to 350
+    plt.yticks(range(0, 401, 50))  # Set Y-axis ticks from 0 to 350 in increments of 50
 
 
     x = 0
@@ -68,6 +61,10 @@ def TopSpeedFunc(y, r, e):
                 horizontalalignment='center', color='white', fontsize = 16, fontweight = "bold")
         x += 1
 
-    plt.suptitle("Top Speed comparison")
-    plt.savefig('Top speed comparison')
-    plt.show()
+
+    plt.suptitle(f"Top speed comparison {session.event['EventName']} {session.event.year}")
+
+    dirOrg.checkForFolder(session.event['EventName'])
+    plt.savefig("plots/" + session.event['EventName'] + "/" + "Top speed comparison " + session.name + '.png')
+
+    return "plots/" + session.event['EventName'] + "/" + "Top speed comparison " + session.name + '.png'
