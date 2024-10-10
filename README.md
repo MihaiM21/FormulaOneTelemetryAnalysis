@@ -97,7 +97,7 @@ python3 program.py
 <p align=center>
    <img src="plots/Belgian Grand Prix/Throttle comparison Qualifying.png" width="800">
    <img src="plots/Belgian Grand Prix/Throttle_graph.png" width="800">
-   <img src="plots/Spanish Grand Prix/Track comparison.png" width="800">
+   <img src="plots/Dutch Grand Prix/Track comparison Qualifying.png" width="800">
    <img src="plots/Belgian Grand Prix/Top speed comparison Qualifying.png" width="800">
 </p>
 
