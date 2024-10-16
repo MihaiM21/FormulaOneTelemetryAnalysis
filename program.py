@@ -80,7 +80,7 @@ def runFile():
         img_path = TrackCompFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
                       entryDriverTwo.get(), entryTeamOne.get(), entryTeamTwo.get())
         
-    elif selectedPlot.get() == "Drivers track comparison" and (
+    elif selectedPlot.get() == "2 Drivers track comparison" and (
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):
         labelForQFP.pack(pady=20, padx=20)
 
@@ -111,6 +111,7 @@ def runFile():
     plot_label = customtkinter.CTkLabel(master=img_frame, image=plot, text="", justify="center")
     plot_label.pack(padx=20, pady=20, fill="both", expand = True)
 
+    # Removing the buttons from the second col
     confirmButton.forget()
     entryDriverOne.forget()
     entryTeamOne.forget()
@@ -145,7 +146,7 @@ file_names = ["Throttle comparison",
               "Qualifying Results",
               "Top Speed",
               "Strategy",
-              "Drivers track comparison",
+              "2 Drivers track comparison",
               "Speed Trace(2 drivers)",
               "Team Pace",
               "Drivers laptimes distribution",
