@@ -88,6 +88,7 @@ def LaptimesDistributionFunc(y,r,e):
     dirOrg.checkForFolder(race.event['EventName'])
     plt.savefig("plots/" + race.event['EventName'] + '/' + 'Laptimes distribution ' + race.name + '.png')
 
+    return "plots/" + race.event['EventName'] + "/" + "Laptimes distribution " + race.name + '.png'
 
     #plt.tight_layout()
     plt.show()

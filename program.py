@@ -92,11 +92,11 @@ def runFile():
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):
         labelForQFP.pack(pady=20, padx=20)
 
-    if selectedPlot.get() == "Team Pace" and (selectedEvent.get() == 'S' or selectedEvent.get() == "R"):
+    if selectedPlot.get() == "Team Pace" and (selectedEvent.get() == 'S' or selectedEvent.get() == "R" or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
         img_path = TeamPaceRankingFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
-    if selectedPlot.get() == "Drivers laptimes distribution" and selectedEvent.get() == 'R':
-        LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+    if selectedPlot.get() == "Drivers laptimes distribution" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
+        img_path = LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
     if selectedPlot.get() == "Driver Laptimes" and selectedEvent.get() == 'R':
         DriverLaptimesFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get())
