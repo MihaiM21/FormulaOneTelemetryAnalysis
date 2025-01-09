@@ -42,7 +42,7 @@ def QualiResults(y,r,e):
 
 
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 10))
     ax.barh(fastest_laps.index, fastest_laps['LapTimeDelta'],
         color=team_colors, edgecolor='grey')
     ax.set_yticks(fastest_laps.index)
@@ -63,9 +63,13 @@ def QualiResults(y,r,e):
     plt.suptitle(f"{session.event['EventName']} {session.event.year} Qualifying\n"
              f"Fastest Lap: {lap_time_string} ({pole_lap['Driver']})")
 
-    dirOrg.checkForFolder(session.event['EventName'])
-    plt.savefig("plots/" + session.event['EventName'] + "/" + 'Quali results.png')
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + ' Quali results.png'
+    plt.savefig(location + "/" + name)
+    return location + "/" + name
 
-    plt.show()
+    #plt.show()
+
 
     # working with program.py

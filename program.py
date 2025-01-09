@@ -14,9 +14,9 @@ from Scripts.Throttle_graph import throttle_graph
 
 def ShowFrame():
     # Showing the input for drivers and teams for some scripts that require it
-    if selectedPlot.get() == "Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)" or selectedPlot.get() == "Driver Laptimes"\
+    if selectedPlot.get() == "2 Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)" or selectedPlot.get() == "Driver Laptimes"\
             or selectedPlot.get() == "Throttle Graphs":
-        if selectedPlot.get() == "Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)":
+        if selectedPlot.get() == "2 Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)":
             labelD1.pack(pady=10, padx=20)
             entryDriverOne.pack(pady=10, padx=20)
             labelT1.pack(pady=10, padx=20)
@@ -34,7 +34,7 @@ def ShowFrame():
             labelD2.pack(pady=10, padx=20)
             entryDriverTwo.pack(pady=10, padx=20)
 
-    elif selectedPlot.get() != 'Drivers track comparison' and selectedPlot.get() != "Speed Trace(2 drivers)":
+    elif selectedPlot.get() != '2 Drivers track comparison' and selectedPlot.get() != "Speed Trace(2 drivers)":
         entryDriverOne.forget()
         entryTeamOne.forget()
         entryDriverTwo.forget()
@@ -61,7 +61,7 @@ def runFile():
         labelForQFP.pack(pady=20, padx=20)
 
     if selectedPlot.get() == 'Qualifying Results' and (selectedEvent.get() == 'SQ' or selectedEvent.get() == "Q" or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
-        QualiResults(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+        img_path = QualiResults(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
     elif selectedPlot.get() == "Qualifying Results" and (selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q'):
         labelForQ.pack(pady=20, padx=20)
 
@@ -75,7 +75,7 @@ def runFile():
     if selectedPlot.get() == 'Strategy' and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
         img_path = StrategyFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
-    if selectedPlot.get() == 'Drivers track comparison' and (
+    if selectedPlot.get() == '2 Drivers track comparison' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'R' or selectedEvent.get() == 'FP3'):
         img_path = TrackCompFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
                       entryDriverTwo.get(), entryTeamOne.get(), entryTeamTwo.get())
