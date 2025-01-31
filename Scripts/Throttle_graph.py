@@ -30,14 +30,14 @@ def throttle_graph(y,r,e,d1,d2):
     driver2 = d2
     year = y
     round = r
-    session = e
+    event = e
 
     # Load the session data
-    race = ff1.get_session(year, round, session)
+    session = ff1.get_session(year, round, event)
 
     # Collect all race laps
-    race.load()
-    laps = race.laps
+    session.load()
+    laps = session.laps
 
     # Getting laps from the drivers
     laps_driver1 = laps.pick_driver(driver1)
@@ -78,8 +78,12 @@ def throttle_graph(y,r,e,d1,d2):
     for a in ax.flat:
         a.label_outer()
 
-    dirOrg.checkForFolder(race.event['EventName'])
-    plt.savefig("plots/" + race.event['EventName'] + "/" + "Throttle_graph.png")
 
-    # WORKING WITH PROGRAM
-    return "plots/" + race.event['EventName'] + "/" + "Throttle_graph.png"
+    plt.suptitle('Throttle graph\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + "Throttle graph.png"
+    plt.savefig(location + "/" + name)
+
+    return location + "/" + name

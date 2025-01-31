@@ -73,9 +73,16 @@ def ThrottleComp(y,r,e):
         ax.text(drv, list_telemetry[x]+1, string_telemetry[x] + "%", horizontalalignment='center', color='white')
         x=x+1
 
-    plt.suptitle('Throttle comparison\n' + session.event['EventName'] + ' ' + session.name)
+    plt.suptitle('Throttle comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(session.event['EventName'])
-    plt.savefig("plots/" + session.event['EventName'] + '/' + 'Throttle comparison ' + session.name + '.png')
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + "Throttle comparison.png"
+    plt.savefig(location + "/" + name)
 
-    return "plots/" + session.event['EventName'] + '/' + 'Throttle comparison ' + session.name + '.png'
+    return location + "/" + name
+
+
+
+    # DONE FOR Serverside
+    # working with program.py
