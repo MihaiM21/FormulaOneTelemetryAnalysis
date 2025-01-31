@@ -52,7 +52,7 @@ def ShowFrame():
 
 
 def runFile():
-    ShowFrame
+    ShowFrame()
     if selectedPlot.get() == 'Throttle comparison' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
         img_path = ThrottleComp(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
