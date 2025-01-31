@@ -17,22 +17,22 @@ def LaptimesDistributionFunc(y,r,e):
 
     ################################################################################ Load the race session
 
-    race = fastf1.get_session(y, r, e)
-    race.load()
+    session = fastf1.get_session(y, r, e)
+    session.load()
 
     ###############################################################################
     # Get all the laps for the point finishers only.
     # Filter out slow laps (yellow flag, VSC, pitstops etc.)
     # as they distort the graph axis.
-    point_finishers = race.drivers[:10]
+    point_finishers = session.drivers[:10]
     print(point_finishers)
-    driver_laps = race.laps.pick_drivers(point_finishers).pick_quicklaps()
+    driver_laps = session.laps.pick_drivers(point_finishers).pick_quicklaps()
     driver_laps = driver_laps.reset_index()
 
     ###############################################################################
     # To plot the drivers by finishing order,
     # we need to get their three-letter abbreviations in the finishing order.
-    finishing_order = [race.get_driver(i)["Abbreviation"] for i in point_finishers]
+    finishing_order = [session.get_driver(i)["Abbreviation"] for i in point_finishers]
     print(finishing_order)
 
     ###############################################################################
@@ -83,14 +83,16 @@ def LaptimesDistributionFunc(y,r,e):
     plt.suptitle("Lap Time Distributions")
     sns.despine(left=True, bottom=True)
 
-    plt.suptitle('Laptimes distribution\n' + race.event['EventName'] + ' ' + race.name)
+    plt.suptitle('Laptimes distribution\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(race.event['EventName'])
-    plt.savefig("plots/" + race.event['EventName'] + '/' + 'Laptimes distribution ' + race.name + '.png')
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + " Laptimes distribution.png"
+    plt.savefig(location + "/" + name)
 
-    return "plots/" + race.event['EventName'] + "/" + "Laptimes distribution " + race.name + '.png'
+    return location + "/" + name
 
     #plt.tight_layout()
-    plt.show()
+    #plt.show()
 
     #DONE

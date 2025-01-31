@@ -69,9 +69,11 @@ def StrategyFunc(y,r,e):
     plt.tight_layout()
     #plt.show()
 
-    plt.suptitle(f"Drivers tyre strategy {session.event['EventName']} {session.event.year}")
+    plt.suptitle('Tyre strategy\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(session.event['EventName'])
-    plt.savefig("plots/" + session.event['EventName'] + "/" + "Drivers tyre strategy " + session.name + '.png')
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + " Tyre strategy.png"
+    plt.savefig(location + "/" + name)
 
-    return "plots/" + session.event['EventName'] + "/" + "Drivers tyre strategy " + session.name + '.png'
+    return location + "/" + name

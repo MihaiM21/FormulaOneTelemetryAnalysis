@@ -16,9 +16,9 @@ def TeamPaceRankingFunc(y,r,e):
     event = r
     tip = e
 
-    race = fastf1.get_session(year, event, tip)
-    race.load()
-    laps = race.laps.pick_quicklaps()
+    session = fastf1.get_session(year, event, tip)
+    session.load()
+    laps = session.laps.pick_quicklaps()
 
     ###############################################################################
     # Convert the lap time column from timedelta to integer.
@@ -61,9 +61,11 @@ def TeamPaceRankingFunc(y,r,e):
     # x-label is redundant
     ax.set(xlabel=None)
     plt.tight_layout()
-    plt.suptitle(f"Team pace {race.event['EventName']} {race.event.year}")
+    plt.suptitle('Team pace\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(race.event['EventName'])
-    plt.savefig("plots/" + race.event['EventName'] + "/" + "Team pace " + race.name + '.png')
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + " Team pace.png"
+    plt.savefig(location + "/" + name)
 
-    return "plots/" + race.event['EventName'] + "/" + "Team pace " + race.name + '.png'
+    return location + "/" + name
