@@ -87,7 +87,7 @@ def runFile():
 
     if selectedPlot.get() == 'Speed Trace(2 drivers)' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
-        SpeedTraceFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
+        img_path = SpeedTraceFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
                        entryDriverTwo.get(), entryTeamOne.get(), entryTeamTwo.get())
     elif selectedPlot.get() == "Speed Trace(2 drivers)" and (
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):

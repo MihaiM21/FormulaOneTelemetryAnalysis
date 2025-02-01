@@ -77,7 +77,7 @@ def ThrottleComp(y,r,e):
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + "Throttle comparison.png"
+    name = str(y) + " " + session.event['EventName'] + " Throttle comparison.png"
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

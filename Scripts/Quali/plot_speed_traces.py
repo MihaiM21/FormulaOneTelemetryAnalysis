@@ -8,6 +8,7 @@ Compare two fastest laps by overlaying their speed traces.
 import matplotlib.pyplot as plt
 
 import fastf1.plotting
+import dirOrg
 
 
 def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
@@ -48,7 +49,12 @@ def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
     ax.set_ylabel('Speed in km/h')
 
     ax.legend()
-    plt.suptitle(f"Fastest Lap Comparison \n "
-             f"{session.event['EventName']} {session.event.year} Qualifying")
 
-    plt.show()
+    plt.suptitle('Fastest Lap Comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + " " + str(d1) + " vs " + str(d2) + " Fastest Lap Comparison.png"
+    plt.savefig(location + "/" + name)
+
+    return location + "/" + name
