@@ -11,6 +11,7 @@ from Scripts.Race.plot_team_pace_ranking import TeamPaceRankingFunc
 from Scripts.Race.plot_driver_laptimes import DriverLaptimesFunc
 from Scripts.Race.plot_laptimes_distribution import LaptimesDistributionFunc
 from Scripts.Throttle_graph import throttle_graph
+from Scripts.Race.plot_position_changes import position_changes
 
 def ShowFrame():
     # Showing the input for drivers and teams for some scripts that require it
@@ -104,6 +105,9 @@ def runFile():
     if selectedPlot.get() == "Throttle Graphs":
         img_path = throttle_graph(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get(), entryDriverTwo.get())
 
+    if selectedPlot.get() == 'Position changes' and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
+        img_path = position_changes(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
+
 
     #Showing the plot
     plot = customtkinter.CTkImage(light_image=Image.open(img_path),
@@ -151,7 +155,8 @@ file_names = ["Throttle comparison",
               "Team Pace",
               "Drivers laptimes distribution",
               "Driver Laptimes",
-              "Throttle Graphs"]
+              "Throttle Graphs",
+              "Position changes"]
 
 event_type = ["FP1", "FP2", "FP3", "SQ", "S", "Q", "R"]
 event_type_FP = ["FP1", "FP2", "FP3"]
