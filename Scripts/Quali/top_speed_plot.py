@@ -60,9 +60,13 @@ def TopSpeedFunc(y, r, e):
         x += 1
 
 
-    plt.suptitle(f"Top speed comparison {session.event['EventName']} {session.event.year}")
 
-    dirOrg.checkForFolder(session.event['EventName'])
-    plt.savefig("plots/" + session.event['EventName'] + "/" + "Top speed comparison " + session.name + '.png')
 
-    return "plots/" + session.event['EventName'] + "/" + "Top speed comparison " + session.name + '.png'
+    plt.suptitle('Top speed comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + "Top speed comparison.png"
+    plt.savefig(location + "/" + name)
+
+    return location + "/" + name

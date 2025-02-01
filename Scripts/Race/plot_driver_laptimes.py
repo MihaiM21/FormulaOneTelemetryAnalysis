@@ -19,14 +19,14 @@ def DriverLaptimesFunc(y,r,e,d):
     ###############################################################################
     # Load the race session.
 
-    race = fastf1.get_session(y, r, e)
-    race.load()
+    session = fastf1.get_session(y, r, e)
+    session.load()
 
     ###############################################################################
     # Get all the laps for a single driver.
     # Filter out slow laps as they distort the graph axis.
 
-    driver_laps = race.laps.pick_driver(d).pick_quicklaps().reset_index()
+    driver_laps = session.laps.pick_driver(d).pick_quicklaps().reset_index()
 
     ###############################################################################
     # Make the scattterplot using lap number as x-axis and lap time as y-axis.
@@ -61,12 +61,14 @@ def DriverLaptimesFunc(y,r,e,d):
     plt.grid(color='w', which='major', axis='both')
     sns.despine(left=True, bottom=True)
 
-    plt.suptitle(d + ' Laptimes\n' + race.event['EventName'] + ' ' + race.name)
+    plt.suptitle(d + ' Laptimes\n' + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(race.event['EventName'])
-    plt.savefig("plots/" + race.event['EventName'] + '/' + d + ' Laptimes ' + race.name + '.png')
 
-    #plt.tight_layout()
-    plt.show()
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
+    location = "plots/" + str(y) + "/" + session.event['EventName']
+    name = str(y) + " " + session.event['EventName'] + " " + d + " Laptimes.png"
+    plt.savefig(location + "/" + name)
+
+    return location + "/" + name
 
     #DONE

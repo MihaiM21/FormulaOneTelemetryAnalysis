@@ -49,11 +49,11 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     color_team1 = fastf1.plotting.team_color(team1)
     color_team2 = fastf1.plotting.team_color(team2)
     # Load the session data
-    quali = ff1.get_session(year, race, event)
+    session = ff1.get_session(year, race, event)
 
     # Get the laps
-    quali.load()
-    laps = quali.laps
+    session.load()
+    laps = session.laps
 
     # Select the laps from drivers
     laps_driver1 = laps.pick_driver(driver1)
@@ -140,18 +140,14 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
 
 
-    plt.suptitle(f"{quali.event['EventName']} {quali.event.year} {driver1} vs {driver2}")
+    plt.suptitle(f"{session.event['EventName']} {session.event.year} {driver1} vs {driver2}")
 
+    plt.suptitle(str(d1) + " vs " + str(d2) + " " + str(year) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(quali.event['EventName'])
-    plt.savefig("plots/" + quali.event['EventName']+"/"+"Track comparison "+ quali.name + '.png')
+    dirOrg.checkForFolder(str(year) + "/" + session.event['EventName'])
+    location = "plots/" + str(year) + "/" + session.event['EventName']
+    name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
+    plt.savefig(location + "/" + name)
 
-    # Printing speed
-    print_sector_times(laps_driver1.pick_fastest(), driver1)
-    print_sector_times(laps_driver2.pick_fastest(), driver2)
-
-
-
-     # plt.show()
-    return "plots/" + quali.event['EventName'] + '/' + 'Track comparison ' + quali.name + '.png'
+    return location + "/" + name
 # WORKING WITH PROGRAM and image view
