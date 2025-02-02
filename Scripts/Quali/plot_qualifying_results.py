@@ -13,6 +13,7 @@ def QualiResults(y,r,e):
     fastf1.plotting.setup_mpl(mpl_timedelta_support=True, color_scheme=None, misc_mpl_mods=False)
 
     session = fastf1.get_session(y, r, e)
+    fastf1.Cache.enable_cache('./cache')
     session.load()
 
 

@@ -15,6 +15,7 @@ def DriverLaptimesFunc(y,r,e,d):
 
     # The misc_mpl_mods option enables minor grid lines which clutter the plot
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
+    fastf1.Cache.enable_cache('./cache')
 
     ###############################################################################
     # Load the race session.

@@ -1,12 +1,10 @@
 """Overlaying speed traces of two laps
-======================================
-
+=====================================
 Compare two fastest laps by overlaying their speed traces.
 """
 
 
 import matplotlib.pyplot as plt
-
 import fastf1.plotting
 import dirOrg
 
@@ -16,7 +14,7 @@ def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
     # enable some matplotlib patches for plotting timedelta values and load
     # FastF1's default color scheme
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
-
+    fastf1.Cache.enable_cache('./cache')
     # load a session and its telemetry data
     session = fastf1.get_session(y, r, e)
     session.load()

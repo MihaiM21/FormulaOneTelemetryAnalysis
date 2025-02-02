@@ -18,6 +18,7 @@ def LaptimesDistributionFunc(y,r,e):
     ################################################################################ Load the race session
 
     session = fastf1.get_session(y, r, e)
+    fastf1.Cache.enable_cache('./cache')
     session.load()
 
     ###############################################################################

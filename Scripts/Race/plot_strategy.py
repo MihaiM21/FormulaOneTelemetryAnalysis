@@ -8,6 +8,7 @@ import dirOrg
 def StrategyFunc(y,r,e):
 
     session = fastf1.get_session(y, r, e)
+    fastf1.Cache.enable_cache('./cache')
     session.load()
     laps = session.laps
 

@@ -50,6 +50,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     color_team2 = fastf1.plotting.team_color(team2)
     # Load the session data
     session = ff1.get_session(year, race, event)
+    fastf1.Cache.enable_cache('./cache')
 
     # Get the laps
     session.load()

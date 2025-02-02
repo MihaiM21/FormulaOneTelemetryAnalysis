@@ -8,7 +8,7 @@ import dirOrg
 
 def TopSpeedFunc(y, r, e):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
-    fastf1.Cache.enable_cache('cache')
+    fastf1.Cache.enable_cache('./cache')
     roundnr = r
     event = e
     year = y

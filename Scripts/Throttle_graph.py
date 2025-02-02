@@ -34,6 +34,7 @@ def throttle_graph(y,r,e,d1,d2):
 
     # Load the session data
     session = ff1.get_session(year, round, event)
+    fastf1.Cache.enable_cache('./cache')
 
     # Collect all race laps
     session.load()

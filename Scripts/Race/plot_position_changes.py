@@ -13,6 +13,7 @@ import dirOrg
 def position_changes(y,r,e):
 
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
+    fastf1.Cache.enable_cache('./cache')
 
     ##############################################################################
     # Load the session and create the plot

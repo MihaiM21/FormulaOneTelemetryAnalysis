@@ -17,6 +17,7 @@ def TeamPaceRankingFunc(y,r,e):
     tip = e
 
     session = fastf1.get_session(year, event, tip)
+    fastf1.Cache.enable_cache('./cache')
     session.load()
     laps = session.laps.pick_quicklaps()
 
