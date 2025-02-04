@@ -212,7 +212,7 @@ yearOptions = customtkinter.CTkOptionMenu(master=f2, values=year_list, variable=
 selectYearText.pack(padx=1, pady=1)
 yearOptions.pack(pady=10, padx=10)
 
-# Options menu for round number
+# Options menu for round number and race name
 selectedRound = customtkinter.StringVar(master=f3)
 selectRoundNumberText = customtkinter.CTkLabel(master=f3, text='Select race number:')
 roundOptions = customtkinter.CTkOptionMenu(master=f3, values=rounds, variable=selectedRound, width=200, fg_color="#262525"
