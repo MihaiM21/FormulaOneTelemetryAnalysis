@@ -96,10 +96,15 @@ python3 program.py
 
 ## Examples of plots generated with FOTA:
 <p align=center>
-   <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix HAM vs VERFastest Lap Comparison.png" width="800">
-   <img src="plots/Belgian Grand Prix/Throttle_graph.png" width="800">
-   <img src="plots/Dutch Grand Prix/Track comparison Qualifying.png" width="800">
-   <img src="plots/Belgian Grand Prix/Top speed comparison Qualifying.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix HAM vs VER Fastest Lap Comparison.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix Laptimes distribution.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix Tyre strategy.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix VER Laptimes.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix VER vs HAM.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTop speed comparison.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixPosition changes.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTeam pace.png" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixThrottle graph" width="800">
 </p>
 
 ---
