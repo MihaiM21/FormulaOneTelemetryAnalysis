@@ -104,7 +104,7 @@ python3 program.py
     <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTop speed comparison.png" width="800">
     <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixPosition changes.png" width="800">
     <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTeam pace.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixThrottle graph" width="800">
+    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixThrottle graph.png" width="800">
 </p>
 
 ---
