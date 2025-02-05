@@ -1,5 +1,5 @@
 <p align=center>
-<img src="https://cdn.discordapp.com/attachments/1279893040344993908/1291046833677926563/T1_logomark.PNG?ex=66feac8f&is=66fd5b0f&hm=44d9347be184c0bd276498a1e6079060ef5bb3014eeefd5bb37cbf874f18b256&" width="200">
+<img src="./lib/logo.png" width="200">
 </p>
 
 <h1 align="center">Formula One Telemetry Analysis - FOTA</h1>
