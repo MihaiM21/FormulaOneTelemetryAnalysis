@@ -84,7 +84,7 @@ def throttle_graph(y,r,e,d1,d2):
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + "Throttle graph.png"
+    name = str(y) + " " + session.event['EventName'] + " Throttle graph.png"
     plt.savefig(location + "/" + name)
 
     return location + "/" + name
