@@ -5,7 +5,8 @@
 <h1 align="center">Formula One Telemetry Analysis - FOTA</h1>
 
 <p align=center>
-<b>Powered by TurnOneOfficial</b>
+<b>Powered by TurnOneOfficial -</b>
+<a href="www.t1f1.com">t1f1.com</a>
 </p>
 
 > [!NOTE]
