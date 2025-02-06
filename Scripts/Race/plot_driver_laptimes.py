@@ -17,19 +17,16 @@ def DriverLaptimesFunc(y,r,e,d):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
     fastf1.Cache.enable_cache('./cache')
 
-    ###############################################################################
     # Load the race session.
 
     session = fastf1.get_session(y, r, e)
     session.load()
 
-    ###############################################################################
     # Get all the laps for a single driver.
     # Filter out slow laps as they distort the graph axis.
 
     driver_laps = session.laps.pick_driver(d).pick_quicklaps().reset_index()
 
-    ###############################################################################
     # Make the scattterplot using lap number as x-axis and lap time as y-axis.
     # Marker colors correspond to the compounds used.
     # Note: as LapTime is represented by timedelta, calling setup_mpl earlier
@@ -48,7 +45,6 @@ def DriverLaptimesFunc(y,r,e,d):
                     legend='auto')
     # sphinx_gallery_defer_figures
 
-    ###############################################################################
     # Make the plot more aesthetic.
     ax.set_xlabel("Lap Number")
     ax.set_ylabel("Lap Time")
