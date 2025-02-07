@@ -30,7 +30,7 @@ def generate_plot():
         plot_type = data.get("plot_type")
         year = data.get("year")
         round_number = data.get("round")
-        event_type = data.get("event")
+        event_type = data.get("eventType")
         driver1 = data.get("driver1", "")
         driver2 = data.get("driver2", "")
         team1 = data.get("team1", "")
