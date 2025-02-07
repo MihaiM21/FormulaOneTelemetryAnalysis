@@ -12,7 +12,8 @@ from Scripts.Race.plot_driver_laptimes import DriverLaptimesFunc
 from Scripts.Race.plot_laptimes_distribution import LaptimesDistributionFunc
 from Scripts.Throttle_graph import throttle_graph
 from Scripts.Race.plot_position_changes import position_changes
-from Scripts.tokenFolder.token_checker import verify_and_delete_code
+from Scripts.tokenFolder.token_checker import verify_token
+from Scripts.tokenFolder.token_checker import delete_token
 
 app = Flask(__name__)
 
@@ -42,7 +43,7 @@ def generate_plot():
             return jsonify({"error": "Missing required parameters"}), 400
 
         # Validate Token
-        if not verify_and_delete_code(token):
+        if not verify_token(token):
             logging.warning("Wrong Token")
             return jsonify({"error": "Wrong Token"})
         # Generate the plot based on plot_type
@@ -77,10 +78,11 @@ def generate_plot():
         # Check if the file exists
         if not os.path.exists(img_path):
             logging.error(f"File not found: {img_path}")
-            return jsonify({"error": "File not generated or missing"}), 500
+            return jsonify({"error": "File not generated or missing (Token remains valid)"}), 500
 
         # Return the image file
         logging.info(f"Successfully generated plot: {img_path}")
+        delete_token(token)
         return send_file(img_path, mimetype='image/png')
 
     except Exception as e:
