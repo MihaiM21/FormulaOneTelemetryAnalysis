@@ -133,7 +133,7 @@ customtkinter.set_appearance_mode("dark")
 # Setting the current year and making a list of years to choose from 2000 till present
 year_list = []
 x = 2023
-while x <= 2024:
+while x <= 2025:
     year_list.append(str(x))
     x = x + 1
 
