@@ -1,5 +1,6 @@
 import tkinter as tk
 import customtkinter
+import fastf1 as ff1
 from PIL import Image
 from Scripts.Quali.Throttle_comparison import ThrottleComp
 from Scripts.Quali.plot_qualifying_results import QualiResults
