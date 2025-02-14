@@ -14,8 +14,10 @@ from Scripts.Throttle_graph import throttle_graph
 from Scripts.Race.plot_position_changes import position_changes
 from Scripts.tokenFolder.token_checker import verify_token
 from Scripts.tokenFolder.token_checker import delete_token
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=['https://www.t1f1.com'])
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -44,8 +46,10 @@ def generate_plot():
 
         # Validate Token
         if not verify_token(token):
+            img_path = "lib/WRONG TOKEN.png"
             logging.warning("Wrong Token")
-            return jsonify({"error": "Wrong Token"})
+            #return jsonify({"error": "Wrong Token"})
+            return send_file(img_path, mimetype='image/png')
         # Generate the plot based on plot_type
         if plot_type == 'Throttle comparison':
             img_path = ThrottleComp(int(year), int(round_number), event_type)
