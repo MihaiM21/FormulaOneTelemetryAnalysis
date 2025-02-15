@@ -53,28 +53,26 @@ def generate_plot():
         # Generate the plot based on plot_type
         if plot_type == 'Throttle comparison':
             img_path = ThrottleComp(int(year), int(round_number), event_type)
-        elif plot_type == 'Qualifying Results':
+        elif plot_type == 'Qualifying results':
             img_path = QualiResults(int(year), int(round_number), event_type)
-        elif plot_type == 'TopSpeed':
+        elif plot_type == 'Top speed':
             img_path = TopSpeedFunc(int(year), int(round_number), event_type)
         elif plot_type == 'Strategy':
             img_path = StrategyFunc(int(year), int(round_number), event_type)
-        elif plot_type == 'DriversTrackComparison':
+        elif plot_type == 'Drivers track comparison':
             img_path = TrackCompFunc(int(year), int(round_number), event_type, driver1, driver2, team1, team2)
-        elif plot_type == 'Speed Trace(2 drivers)':
+        elif plot_type == 'Speed trace':
             img_path = SpeedTraceFunc(int(year), int(round_number), event_type, driver1, driver2, team1, team2)
-        elif plot_type == 'TeamPace':
+        elif plot_type == 'Team pace':
             img_path = TeamPaceRankingFunc(int(year), int(round_number), event_type)
-        elif plot_type == 'DriversLaptimesDistribution':
+        elif plot_type == 'Drivers laptimes distribution':
             img_path = LaptimesDistributionFunc(int(year), int(round_number), event_type)
-        elif plot_type == 'OneDriverLaptimes':
+        elif plot_type == 'Driver laptimes':
             img_path = DriverLaptimesFunc(int(year), int(round_number), event_type, driver1)
-        elif plot_type == 'ThrottleGraph':
+        elif plot_type == 'Throttle graph':
             img_path = throttle_graph(int(year), int(round_number), event_type, driver1, driver2)
-        elif plot_type == 'PositionChanges':
+        elif plot_type == 'Position changes':
             img_path = position_changes(int(year), int(round_number), event_type)
-        elif plot_type == 'SpeedTraces':
-            img_path = SpeedTraceFunc(int(year), int(round_number), event_type, driver1, driver2, team1, team2)
         else:
             logging.warning("Invalid plot type")
             return jsonify({"error": "Invalid plot type"}), 400
