@@ -48,8 +48,8 @@ def TopSpeedFunc(y, r, e):
     ax.bar(teams, list_top_speed, color=list_colors)
 
     # Set Y-axis limits and ticks
-    ax.set_ylim(300, 350)
-    plt.yticks(range(300, 351,5))
+    ax.set_ylim(300, 400)
+    plt.yticks(range(300, 401, 5))
 
 
     x = 0
