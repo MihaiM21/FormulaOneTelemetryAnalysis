@@ -34,8 +34,6 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # Setup plotting
     plotting.setup_mpl()
 
-    # Save location
-    save_location = 'C:/Stuff and Games/Formula One/Python/plots'
 
     # Data for the event
     year = y
@@ -135,9 +133,9 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     plt.axis('equal')
     plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
 
-    cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
-    cbar.set_ticks(np.arange(1.5, 3.5))
-    cbar.set_ticklabels([driver1, driver2])
+    #cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
+    #cbar.set_ticks(np.arange(1.5, 3.5))
+    #cbar.set_ticklabels([driver1, driver2])
 
 
 
@@ -147,7 +145,8 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
     dirOrg.checkForFolder(str(year) + "/" + session.event['EventName'])
     location = "plots/" + str(year) + "/" + session.event['EventName']
-    name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
+    #name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
+    name = session.event['EventName'] + " " + str(session.name) +" " + str(session.event.year) + " " + str(driver1) + " vs " + str(driver2) + ".png"
     plt.savefig(location + "/" + name)
 
     return location + "/" + name
