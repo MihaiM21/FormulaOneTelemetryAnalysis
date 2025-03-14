@@ -67,7 +67,7 @@ def TopSpeedFunc(y, r, e):
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = 'Top speed comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name + " .png"
+    name = 'Top speed comparison ' + str(y) + " " + session.event['EventName'] + ' ' + session.name + " .png"
     plt.savefig(location + "/" + name)
 
     return location + "/" + name
