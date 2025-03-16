@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import fastf1.plotting
 import dirOrg
-
+from ..teamColorPicker import team_colors, teams
 def TopSpeedFunc(y, r, e):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
     fastf1.Cache.enable_cache('./cache')
@@ -29,9 +29,12 @@ def TopSpeedFunc(y, r, e):
 
 
     list_colors = list()
-    for tms in teams:
-        teamcolor = fastf1.plotting.team_color(tms)
-        list_colors.append(teamcolor)
+    # for tms in teams:
+    #     teamcolor = fastf1.plotting.team_color(tms)
+    #     list_colors.append(teamcolor)
+
+
+    list_colors = [team_colors[tms] for tms in teams if tms in team_colors]
 
     list_top_speed, teams, list_colors = (list(t) for t in zip(*sorted(zip(list_top_speed, teams, list_colors))))
 
@@ -49,8 +52,8 @@ def TopSpeedFunc(y, r, e):
 
     # Set Y-axis limits and ticks
     # 400 is the best for now, check for 380
-    ax.set_ylim(300, 400)
-    plt.yticks(range(300, 401, 5))
+    ax.set_ylim(290, 390)
+    plt.yticks(range(290, 391, 10))
 
 
     x = 0
