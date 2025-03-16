@@ -36,6 +36,7 @@ def TopSpeedFunc(y, r, e):
 
     list_colors = [team_colors[tms] for tms in teams if tms in team_colors]
 
+
     list_top_speed, teams, list_colors = (list(t) for t in zip(*sorted(zip(list_top_speed, teams, list_colors))))
 
 

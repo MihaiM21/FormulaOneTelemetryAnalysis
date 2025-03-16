@@ -3,9 +3,10 @@
 import fastf1
 import fastf1.plotting
 import seaborn as sns
+import pandas as pd
 from matplotlib import pyplot as plt
 import dirOrg
-
+from ..teamColorPicker import team_colors, teams
 
 fastf1.plotting.setup_mpl(mpl_timedelta_support=False, misc_mpl_mods=False)
 
@@ -41,6 +42,8 @@ def TeamPaceRankingFunc(y,r,e):
 
     # make a color palette associating team names to hex codes
     team_palette = {team: fastf1.plotting.team_color(team) for team in team_order}
+
+
 
     #   ##############################################################################
     fig, ax = plt.subplots(figsize=(12, 12))
