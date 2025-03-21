@@ -4,8 +4,11 @@ from fastf1 import plotting
 import pandas as pd
 import matplotlib.pyplot as plt
 import fastf1.plotting
+import matplotlib.image as mpimg
+
 import dirOrg
 from ..teamColorPicker import team_colors, teams
+
 def TopSpeedFunc(y, r, e):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
     fastf1.Cache.enable_cache('./cache')
@@ -66,8 +69,9 @@ def TopSpeedFunc(y, r, e):
         x += 1
 
 
-
-
+    # Adding Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
     plt.suptitle('Top speed comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])

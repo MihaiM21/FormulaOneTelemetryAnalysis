@@ -4,6 +4,7 @@ from fastf1 import plotting
 from matplotlib.collections import LineCollection
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.image as mpimg
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import dirOrg
 from ..teamColorPicker import get_team_color
@@ -121,7 +122,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     lc_comp.set_linewidth(5)
 
     # Setting the size of the image
-    plt.rcParams['figure.figsize'] = [10, 10]
+    plt.rcParams['figure.figsize'] = [13, 13]
 
 
     plt.gca().add_collection(lc_comp)
@@ -134,9 +135,12 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
 
 
-    plt.suptitle(f"{session.event['EventName']} {session.event.year} {driver1} vs {driver2}")
 
     plt.suptitle(str(d1) + " vs " + str(d2) + " " + str(year) + " " + session.event['EventName'] + ' ' + session.name)
+
+    # Adding Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    plt.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(year) + "/" + session.event['EventName'])
     location = "plots/" + str(year) + "/" + session.event['EventName']

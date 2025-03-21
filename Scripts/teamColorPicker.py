@@ -46,7 +46,7 @@ def get_team_color(team):
 
 
 
-    team = team.lower().strip()  # Normalizează numele echipei (ignora case sensitivity și spațiile)
+    team = team.lower().strip()
 
     for official_name, aliases in team_aliases.items():
         if team in aliases:

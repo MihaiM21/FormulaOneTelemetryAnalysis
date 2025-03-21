@@ -4,6 +4,7 @@ from fastf1 import plotting
 import pandas as pd
 import matplotlib.pyplot as plt
 import fastf1.plotting
+import matplotlib.image as mpimg
 import dirOrg
 from ..teamColorPicker import get_driver_color
 
@@ -64,6 +65,10 @@ def ThrottleComp(y,r,e):
         x=x+1
 
     plt.suptitle('Throttle comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    # Adding Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
