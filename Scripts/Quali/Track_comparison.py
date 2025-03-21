@@ -1,19 +1,12 @@
 import fastf1 as ff1
 import fastf1
 from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
 from matplotlib.collections import LineCollection
-from matplotlib import cm
-import seaborn as sns
-from matplotlib import pyplot as plt
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib as mpl
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import dirOrg
+from ..teamColorPicker import get_team_color
 
 
 def print_sector_times(lap, driver_code):
@@ -44,8 +37,10 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     team2 = t2
     driver2 = d2
     # Importing team colors
-    color_team1 = fastf1.plotting.team_color(team1)
-    color_team2 = fastf1.plotting.team_color(team2)
+    # color_team1 = fastf1.plotting.team_color(team1)
+    # color_team2 = fastf1.plotting.team_color(team2)
+    color_team1 = get_team_color(team1)
+    color_team2 = get_team_color(team2)
     # Load the session data
     session = ff1.get_session(year, race, event)
     fastf1.Cache.enable_cache('./cache')
