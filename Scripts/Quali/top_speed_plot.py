@@ -34,7 +34,8 @@ def TopSpeedFunc(y, r, e):
     #     list_colors.append(teamcolor)
 
 
-    list_colors = [team_colors[tms] for tms in teams if tms in team_colors]
+    list_colors = [team_colors[tms] if tms in team_colors else "#FFFFFF" for tms in teams]
+
 
 
     list_top_speed, teams, list_colors = (list(t) for t in zip(*sorted(zip(list_top_speed, teams, list_colors))))
@@ -60,8 +61,8 @@ def TopSpeedFunc(y, r, e):
     x = 0
     for tms in teams:
 
-        ax.text(tms, list_top_speed[x] + 1, str(list_top_speed[x]) + 'km/h', verticalalignment='bottom',
-                horizontalalignment='center', color='white', fontsize = 16, fontweight = "bold")
+        ax.text(tms, int(list_top_speed[x]) + 1, f"{int(list_top_speed[x])}km/h", verticalalignment='bottom',
+            horizontalalignment='center', color='white', fontsize=16, fontweight="bold")
         x += 1
 
 
