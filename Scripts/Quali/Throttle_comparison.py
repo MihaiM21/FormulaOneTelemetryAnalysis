@@ -1,23 +1,11 @@
 import fastf1 as ff1
 import fastf1
 from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
-from matplotlib.collections import LineCollection
-from matplotlib import cm
-import seaborn as sns
-from matplotlib import pyplot as plt
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib as mpl
 import fastf1.plotting
-from fastf1.core import Laps
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-from timple.timedelta import strftimedelta
-import sys
 import dirOrg
+from ..teamColorPicker import get_driver_color
 
 def ThrottleComp(y,r,e):  
 
@@ -52,7 +40,9 @@ def ThrottleComp(y,r,e):
 
     list_colors = list()
     for drv in drivers:
-        drivercolor = fastf1.plotting.driver_color(drv)
+        # drivercolor = fastf1.plotting.driver_color(drv)
+        drivercolor = get_driver_color(drv)
+        print(drivercolor)
         list_colors.append(drivercolor)
 
 
