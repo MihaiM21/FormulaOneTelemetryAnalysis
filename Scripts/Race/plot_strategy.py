@@ -1,8 +1,7 @@
-
-
 import fastf1
 import fastf1.plotting
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
 import dirOrg
 
 def StrategyFunc(y,r,e):
@@ -29,7 +28,7 @@ def StrategyFunc(y,r,e):
     print(stints)
 
 
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(13, 13))
 
     for driver in drivers:
         driver_stints = stints.loc[stints["Driver"] == driver]
@@ -71,6 +70,10 @@ def StrategyFunc(y,r,e):
     #plt.show()
 
     plt.suptitle('Tyre strategy\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    # Adding the Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
