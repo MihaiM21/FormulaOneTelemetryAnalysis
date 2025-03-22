@@ -100,7 +100,7 @@ def runFile():
     if selectedPlot.get() == "Drivers laptimes distribution" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
         img_path = LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
-    if selectedPlot.get() == "Driver Laptimes" and selectedEvent.get() == 'R':
+    if selectedPlot.get() == "Driver Laptimes" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
         img_path = DriverLaptimesFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get())
 
     if selectedPlot.get() == "Throttle Graphs":

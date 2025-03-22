@@ -8,6 +8,7 @@ import fastf1
 import fastf1.plotting
 import seaborn as sns
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
 import dirOrg
 
 def DriverLaptimesFunc(y,r,e,d):
@@ -32,7 +33,7 @@ def DriverLaptimesFunc(y,r,e,d):
     # Note: as LapTime is represented by timedelta, calling setup_mpl earlier
     # is required.
 
-    fig, ax = plt.subplots(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(13, 13))
 
     sns.scatterplot(data=driver_laps,
                     x="LapNumber",
@@ -60,6 +61,9 @@ def DriverLaptimesFunc(y,r,e,d):
 
     plt.suptitle(d + ' Laptimes\n' + session.event['EventName'] + ' ' + session.name)
 
+    # Adding Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
