@@ -150,7 +150,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
 
     dirOrg.checkForFolder(str(year) + "/" + session.event['EventName'])
     location = "plots/" + str(year) + "/" + session.event['EventName']
-    #name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
+    # name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
     name = session.event['EventName'] + " " + str(session.name) +" " + str(session.event.year) + " " + str(driver1) + " vs " + str(driver2) + ".png"
     plt.savefig(location + "/" + name)
 
