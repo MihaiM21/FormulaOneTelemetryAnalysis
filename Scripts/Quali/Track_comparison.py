@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.image as mpimg
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+import matplotlib.patches as mpatches
 import dirOrg
 from ..teamColorPicker import get_team_color
 
@@ -129,11 +130,16 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     plt.axis('equal')
     plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
 
-    #cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
-    #cbar.set_ticks(np.arange(1.5, 3.5))
-    #cbar.set_ticklabels([driver1, driver2])
+    # Removed because of errors
+    # cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
+    # cbar.set_ticks(np.arange(1.5, 3.5))
+    # cbar.set_ticklabels([driver1, driver2])
 
+    # New legend model
+    legend_patches = [mpatches.Patch(color=color_team1, label=driver1),
+                      mpatches.Patch(color=color_team2, label=driver2)]
 
+    plt.legend(handles=legend_patches, loc='upper right')
 
 
     plt.suptitle(str(d1) + " vs " + str(d2) + " " + str(year) + " " + session.event['EventName'] + ' ' + session.name)
