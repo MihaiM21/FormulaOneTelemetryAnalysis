@@ -7,6 +7,8 @@ import fastf1
 import fastf1.plotting
 import seaborn as sns
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
+from ..teamColorPicker import get_driver_color
 import dirOrg
 
 def LaptimesDistributionFunc(y,r,e):
@@ -18,14 +20,14 @@ def LaptimesDistributionFunc(y,r,e):
     ################################################################################ Load the race session
 
     session = fastf1.get_session(y, r, e)
-    fastf1.Cache.enable_cache('./cache')
     session.load()
 
     ###############################################################################
     # Get all the laps for the point finishers only.
     # Filter out slow laps (yellow flag, VSC, pitstops etc.)
     # as they distort the graph axis.
-    point_finishers = session.drivers[:10]
+    #point_finishers = session.drivers[:10]
+    point_finishers = session.results["DriverNumber"].head(10).tolist()
     print(point_finishers)
     driver_laps = session.laps.pick_drivers(point_finishers).pick_quicklaps()
     driver_laps = driver_laps.reset_index()
@@ -37,45 +39,36 @@ def LaptimesDistributionFunc(y,r,e):
     print(finishing_order)
 
     ###############################################################################
-    # We need to modify the DRIVER_COLORS palette.
-    # Its keys are the driver's full names but we need the keys to be the drivers'
-    # three-letter abbreviations.
-    # We can do this with the DRIVER_TRANSLATE mapping.
-    driver_colors = {abv: fastf1.plotting.DRIVER_COLORS[driver] for abv,
-                    driver in fastf1.plotting.DRIVER_TRANSLATE.items()}
-    print(driver_colors)
-
-    ###############################################################################
     # First create the violin plots to show the distributions.
     # Then use the swarm plot to show the actual laptimes.
 
     # create the figure
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(13, 13))
 
-    # Seaborn doesn't have proper timedelta support
+    # Seaborn doesn't have proper timedelta support,
     # so we have to convert timedelta to float (in seconds)
     driver_laps["LapTime(s)"] = driver_laps["LapTime"].dt.total_seconds()
 
     sns.violinplot(data=driver_laps,
-                    x="Driver",
-                    y="LapTime(s)",
-                    inner=None,
-                    scale="area",
-                    order=finishing_order,
-                    palette=driver_colors
-                    )
+                   x="Driver",
+                   y="LapTime(s)",
+                   hue="Driver",
+                   inner=None,
+                   density_norm="area",
+                   order=finishing_order,
+                   palette=fastf1.plotting.get_driver_color_mapping(session=session)
+                   )
 
     sns.swarmplot(data=driver_laps,
                   x="Driver",
                   y="LapTime(s)",
                   order=finishing_order,
                   hue="Compound",
-                  palette=fastf1.plotting.COMPOUND_COLORS,
-                  hue_order=["SOFT", "MEDIUM", "HARD"],
+                  palette=fastf1.plotting.get_compound_mapping(session=session),
+                  hue_order=["SOFT", "MEDIUM", "HARD", "INTERMEDIATE"],
                   linewidth=0,
-                  size=5,
+                  size=4,
                   )
-    # sphinx_gallery_defer_figures
 
     ###############################################################################
     # Make the plot more aesthetic
@@ -85,6 +78,11 @@ def LaptimesDistributionFunc(y,r,e):
     sns.despine(left=True, bottom=True)
 
     plt.suptitle('Laptimes distribution\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+    plt.tight_layout()
+
+    # Adding the Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']
@@ -93,7 +91,7 @@ def LaptimesDistributionFunc(y,r,e):
 
     return location + "/" + name
 
-    #plt.tight_layout()
+
     #plt.show()
 
-    #DONE
+    #Merge dar NU FOLOSESTE CULORILE Turn ONE

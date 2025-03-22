@@ -97,7 +97,7 @@ def runFile():
     if selectedPlot.get() == "Team Pace" and (selectedEvent.get() == 'S' or selectedEvent.get() == "R" or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
         img_path = TeamPaceRankingFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
-    if selectedPlot.get() == "Drivers laptimes distribution" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
+    if selectedPlot.get() == "Drivers laptimes distribution" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3' or selectedEvent.get() == 'S'):
         img_path = LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
     if selectedPlot.get() == "Driver Laptimes" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
