@@ -5,6 +5,8 @@ import fastf1.plotting
 import seaborn as sns
 import pandas as pd
 from matplotlib import pyplot as plt
+import matplotlib.image as mpimg
+from ..teamColorPicker import get_team_color
 import dirOrg
 from ..teamColorPicker import team_colors, teams
 
@@ -41,12 +43,12 @@ def TeamPaceRankingFunc(y,r,e):
     print(team_order)
 
     # make a color palette associating team names to hex codes
-    team_palette = {team: fastf1.plotting.team_color(team) for team in team_order}
+    team_palette = {team: get_team_color(team) for team in team_order}
 
 
 
     #   ##############################################################################
-    fig, ax = plt.subplots(figsize=(12, 12))
+    fig, ax = plt.subplots(figsize=(13, 13))
     sns.boxplot(
         data=transformed_laps,
         x="Team",
@@ -66,6 +68,10 @@ def TeamPaceRankingFunc(y,r,e):
     ax.set(xlabel=None)
     plt.tight_layout()
     plt.suptitle('Team pace\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
+
+    # Adding the Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
     location = "plots/" + str(y) + "/" + session.event['EventName']

@@ -25,7 +25,7 @@ def get_team_color(team):
         "Haas": ["haas", "has"],
         "Kick Sauber": ["kick sauber", "sauber", "kick"],
         "McLaren": ["mclaren", "mcl"],
-        "Mercedes": ["mercedes", "merc"],
+        "Mercedes": ["mercedes", "merc", "mer"],
         "Racing Bulls": ["racing bulls", "rb", "racingbulls", "visa cash app rb", "vcarb"],
         "Red Bull Racing": ["red bull racing", "redbull", "rbr"],
         "Williams": ["williams", "wil"]
