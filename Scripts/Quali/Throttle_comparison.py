@@ -41,6 +41,7 @@ def ThrottleComp(y,r,e):
 
     list_colors = list()
     for drv in drivers:
+        # Removed the FF1 driver color and using ours from now on.
         # drivercolor = fastf1.plotting.driver_color(drv)
         drivercolor = get_driver_color(drv)
         print(drivercolor)
