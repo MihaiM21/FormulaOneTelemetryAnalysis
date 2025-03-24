@@ -13,8 +13,6 @@ def ThrottleComp(y,r,e):
     fastf1.plotting.setup_mpl(misc_mpl_mods = False)
     ff1.Cache.enable_cache('./cache')
 
-    #Information needed to be changed every race !!!
-
     roundnr = r
     event = e
     year = y
