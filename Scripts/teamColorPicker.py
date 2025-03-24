@@ -112,5 +112,6 @@ def get_driver_color(driver):
             # print(f"Found match: {official_name}, returning {driver_colors[official_name]}")
             return driver_colors[official_name]
 
+    # If the driver is not found the color will be white
     # print("No match found, returning #FFFFFF")
     return "#FFFFFF"
