@@ -1,22 +1,8 @@
-import fastf1 as ff1
-from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
+
 import fastf1 as ff1
 import fastf1
 from fastf1 import plotting
-from matplotlib import pyplot as plt
-from matplotlib.pyplot import figure
-from matplotlib.collections import LineCollection
-from matplotlib import cm
-import seaborn as sns
-from matplotlib import pyplot as plt
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-import matplotlib as mpl
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import dirOrg
 
 def throttle_graph(y,r,e,d1,d2):
