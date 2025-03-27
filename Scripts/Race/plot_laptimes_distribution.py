@@ -16,7 +16,7 @@ def LaptimesDistributionFunc(y,r,e):
 
     # enabling misc_mpl_mods will turn on minor grid lines that clutters the plot
     fastf1.plotting.setup_mpl(mpl_timedelta_support=False, misc_mpl_mods=False)
-
+    fastf1.Cache.enable_cache('./cache')
     ################################################################################ Load the race session
 
     session = fastf1.get_session(y, r, e)
