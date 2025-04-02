@@ -24,7 +24,7 @@ def print_sector_times(lap, driver_code):
 
 def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # Enable the cache
-    #ff1.Cache.enable_cache('C:\Stuff and Games\Formula One\Python\cache')
+    ff1.Cache.enable_cache('cache')
 
     # Setup plotting
     plotting.setup_mpl()

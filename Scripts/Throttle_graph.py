@@ -1,15 +1,14 @@
 
 import fastf1 as ff1
-import fastf1
 from fastf1 import plotting
 import matplotlib.pyplot as plt
 import dirOrg
+import matplotlib.image as mpimg
 
 def throttle_graph(y,r,e,d1,d2):
     # Setup plotting
     plotting.setup_mpl()
     # Enable the cache
-    # ff1.Cache.enable_cache('cache')
 
 
     driver1 = d1
@@ -20,7 +19,7 @@ def throttle_graph(y,r,e,d1,d2):
 
     # Load the session data
     session = ff1.get_session(year, round, event)
-    fastf1.Cache.enable_cache('./cache')
+    ff1.Cache.enable_cache('./cache')
 
     # Collect all race laps
     session.load()
@@ -39,7 +38,7 @@ def throttle_graph(y,r,e,d1,d2):
     telemetry_driver2 = fastest_driver2.get_car_data().add_distance()
 
     # 4 subplots in the same image
-    fig, ax = plt.subplots(3)
+    fig, ax = plt.subplots(3 ,figsize=(13, 13))
     fig.suptitle("Fastest Lap Telemetry Comparison")
 
     # Plot for Speed and Distance (axis)
@@ -56,6 +55,17 @@ def throttle_graph(y,r,e,d1,d2):
     ax[2].plot(telemetry_driver2['Distance'], telemetry_driver2['Brake'], label=driver2)
     ax[2].set(ylabel='Brakes')
 
+    # Obține datele de timp pentru cel mai rapid tur
+    telemetry_driver1['LapTime(s)'] = (telemetry_driver1['Time'] - telemetry_driver1['Time'].iloc[0]).dt.total_seconds()
+    telemetry_driver2['LapTime(s)'] = (telemetry_driver2['Time'] - telemetry_driver2['Time'].iloc[0]).dt.total_seconds()
+
+    # Plot pentru timpul pe tur în funcție de distanță
+    # ax[3].plot(telemetry_driver1['Distance'], telemetry_driver1['LapTime(s)'], label=driver1)
+    # ax[3].plot(telemetry_driver2['Distance'], telemetry_driver2['LapTime(s)'], label=driver2)
+    #
+    # ax[3].set(ylabel='Lap Time (s)', xlabel='Distance (m)')
+    # ax[3].legend(loc="lower right")
+
     # NO NEED
     #ax[3].plot(telemetry_driver1['Distance'], telemetry_driver1['Brake'], label=driver1)
     #ax[3].plot(telemetry_driver1['Distance'], telemetry_driver1['Throttle'], label=driver1)
@@ -65,6 +75,9 @@ def throttle_graph(y,r,e,d1,d2):
     for a in ax.flat:
         a.label_outer()
 
+    # Adding Watermark
+    logo = mpimg.imread('lib/logo mic.png')
+    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
     plt.suptitle('Throttle graph\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
