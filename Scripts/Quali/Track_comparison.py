@@ -153,6 +153,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
     name = session.event['EventName'] + " " + str(session.name) +" " + str(session.event.year) + " " + str(driver1) + " vs " + str(driver2) + ".png"
     plt.savefig(location + "/" + name)
+    plt.close()
 
     return location + "/" + name
 # WORKING WITH PROGRAM and image view
