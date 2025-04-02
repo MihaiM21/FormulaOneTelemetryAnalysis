@@ -38,7 +38,7 @@ def throttle_graph(y,r,e,d1,d2):
     telemetry_driver2 = fastest_driver2.get_car_data().add_distance()
 
     # 4 subplots in the same image
-    fig, ax = plt.subplots(3 ,figsize=(13, 13))
+    fig, ax = plt.subplots(3 ,figsize=(13, 13), clear = "True")
     fig.suptitle("Fastest Lap Telemetry Comparison")
 
     # Plot for Speed and Distance (axis)
@@ -85,5 +85,7 @@ def throttle_graph(y,r,e,d1,d2):
     location = "plots/" + str(y) + "/" + session.event['EventName']
     name = str(y) + " " + session.event['EventName'] + " Throttle graph.png"
     plt.savefig(location + "/" + name)
+
+    plt.close()
 
     return location + "/" + name
