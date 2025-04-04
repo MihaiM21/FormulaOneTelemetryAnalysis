@@ -123,7 +123,8 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     lc_comp.set_linewidth(5)
 
     # Setting the size of the image
-    plt.rcParams['figure.figsize'] = [13, 13]
+    fig, ax = plt.subplots(figsize=(13, 13))
+    #plt.rcParams['figure.figsize'] = [13, 13]
 
 
     plt.gca().add_collection(lc_comp)
