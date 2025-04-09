@@ -95,16 +95,17 @@ python3 program.py
    The generated plot will be saved in the `plots` folder, where you can review and analyze it at your convenience. Each file will be named according to the selected event, making it easy to organize and compare multiple data sets.
 
 ## Examples of plots generated with FOTA:
-<p align=center>
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix HAM vs VER Fastest Lap Comparison.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix Laptimes distribution.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix Tyre strategy.png" width="800">
+<p align=center>  
+    <img src="plots/2025/Japanese Grand Prix/Driver Analysis 2025 Japanese Grand Prix SAI.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand Prix LEC vs PIA Fastest Lap Comparison.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand Prix Laptimes distribution.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand Prix Tyre strategy.png" width="800">
     <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix VER Laptimes.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand Prix VER vs HAM.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTop speed comparison.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixPosition changes.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixTeam pace.png" width="800">
-    <img src="plots/2024/Spanish Grand Prix/2024 Spanish Grand PrixThrottle graph.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/Japanese Grand Prix Qualifying 2025 HAM vs NOR.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/Top speed comparison 2025 Japanese Grand Prix Qualifying .png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand Prix Position changes.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand Prix Team pace.png" width="800">
+    <img src="plots/2025/Japanese Grand Prix/2025 Japanese Grand PrixHAM vs LEC Throttle graph.png" width="800">
 </p>
 
 ---
