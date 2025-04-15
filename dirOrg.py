@@ -11,6 +11,18 @@ def checkForFolder(name):
     path = "plots/" + name
     if os.path.isdir(path):
         print("Folder already exists")
-        print(os.path.join('plots', name))
+        # print(os.path.join('plots', name))
     else:
         createFolderForPlots(name)
+
+# Function for checking if the file already exists on the server
+
+def checkForFile(original_path, name):
+    #path = os.path.join('plots', name)
+    path = os.path.join(original_path, name)
+    if os.path.isfile(path):
+        print("File already exists")
+        return path
+    else:
+        path = "NULL"
+        return path
