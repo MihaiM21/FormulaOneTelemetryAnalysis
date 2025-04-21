@@ -8,7 +8,7 @@ import matplotlib.image as mpimg
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.patches as mpatches
 import dirOrg
-from ..teamColorPicker import get_team_color
+from ..teamColorPicker import get_team_color, get_driver_color
 
 
 def print_sector_times(lap, driver_code):
@@ -21,6 +21,14 @@ def print_sector_times(lap, driver_code):
     speed = max(telemetry['Speed'])
     print(f"Lap {lap_number}: Sector 1: {sector1}, Sector 2: {sector2}, Sector 3: {sector3}, Speed: {speed}")
     print("\n")
+
+def _init(y, r, e, d1, d2, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    # name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
+    name = session.event['EventName'] + " " + str(session.name) + " " + str(session.event.year) + " " + str(
+        d1) + " vs " + str(d2) + ".png"
+    return location, name
 
 def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # Enable the cache
@@ -41,8 +49,8 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # Importing team colors
     # color_team1 = fastf1.plotting.team_color(team1)
     # color_team2 = fastf1.plotting.team_color(team2)
-    color_team1 = get_team_color(team1)
-    color_team2 = get_team_color(team2)
+    color_team1 = get_driver_color(driver1)
+    color_team2 = get_driver_color(driver2)
     # Load the session data
     session = ff1.get_session(year, race, event)
     fastf1.Cache.enable_cache('./cache')
@@ -50,6 +58,13 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     # Get the laps
     session.load()
     laps = session.laps
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e,d1, d2, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     # Select the laps from drivers
     laps_driver1 = laps.pick_driver(driver1)
@@ -149,10 +164,7 @@ def TrackCompFunc(y, r, e, d1, d2, t1, t2):
     logo = mpimg.imread('lib/logo mic.png')
     plt.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(year) + "/" + session.event['EventName'])
-    location = "plots/" + str(year) + "/" + session.event['EventName']
-    # name = str(year) + " " + session.event['EventName'] + " " +str(d1) + " vs " + str(d2) +".png"
-    name = session.event['EventName'] + " " + str(session.name) +" " + str(session.event.year) + " " + str(driver1) + " vs " + str(driver2) + ".png"
+
     plt.savefig(location + "/" + name)
     plt.close()
 
