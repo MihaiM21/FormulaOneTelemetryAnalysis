@@ -13,11 +13,12 @@ from Scripts.Race.plot_driver_laptimes import DriverLaptimesFunc
 from Scripts.Race.plot_laptimes_distribution import LaptimesDistributionFunc
 from Scripts.Throttle_graph import throttle_graph
 from Scripts.Race.plot_position_changes import position_changes
+from Scripts.Complex.driver_analysis import driver_analysis
 
 def ShowFrame():
     # Showing the input for drivers and teams for some scripts that require it
     if selectedPlot.get() == "2 Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)" or selectedPlot.get() == "Driver Laptimes"\
-            or selectedPlot.get() == "Throttle Graphs":
+            or selectedPlot.get() == "Throttle Graphs" or selectedPlot.get() == "Driver Analysis":
         if selectedPlot.get() == "2 Drivers track comparison" or selectedPlot.get() == "Speed Trace(2 drivers)":
             labelD1.pack(pady=10, padx=20)
             entryDriverOne.pack(pady=10, padx=20)
@@ -27,7 +28,7 @@ def ShowFrame():
             entryDriverTwo.pack(pady=10, padx=20)
             labelT2.pack(pady=10, padx=20)
             entryTeamTwo.pack(pady=10, padx=20)
-        elif selectedPlot.get() == "Driver Laptimes":
+        elif selectedPlot.get() == "Driver Laptimes" or selectedPlot.get() == "Driver Analysis":
             labelD1.pack(pady=10, padx=20)
             entryDriverOne.pack(pady=10, padx=20)
         elif selectedPlot.get() == "Throttle Graphs":
@@ -89,7 +90,7 @@ def runFile():
     if selectedPlot.get() == 'Speed Trace(2 drivers)' and (
             selectedEvent.get() == 'SQ' or selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP1' or selectedEvent.get() == 'FP2' or selectedEvent.get() == 'FP3'):
         img_path = SpeedTraceFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get(),
-                       entryDriverTwo.get(), entryTeamOne.get(), entryTeamTwo.get())
+                       entryDriverTwo.get())
     elif selectedPlot.get() == "Speed Trace(2 drivers)" and (
             selectedEvent.get() != 'SQ' or selectedEvent.get() != 'Q' and selectedEvent.get() != 'FP1' and selectedEvent.get() != 'FP2' and selectedEvent.get() != 'FP3'):
         labelForQFP.pack(pady=20, padx=20)
@@ -101,7 +102,7 @@ def runFile():
         img_path = LaptimesDistributionFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
     if selectedPlot.get() == "Driver Laptimes" and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
-        img_path = DriverLaptimesFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get())
+        img_path = DriverLaptimesFunc(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get())
 
     if selectedPlot.get() == "Throttle Graphs":
         img_path = throttle_graph(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(),entryDriverOne.get(), entryDriverTwo.get())
@@ -109,6 +110,8 @@ def runFile():
     if selectedPlot.get() == 'Position changes' and (selectedEvent.get() == 'R' or selectedEvent.get() == 'S'):
         img_path = position_changes(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get())
 
+    if selectedPlot.get() == "Driver Analysis" and (selectedEvent.get() == 'Q' or selectedEvent.get() == 'FP2'):
+        img_path = driver_analysis(int(selectedYear.get()), int(selectedRound.get()), selectedEvent.get(), entryDriverOne.get())
 
     #Showing the plot
     plot = customtkinter.CTkImage(light_image=Image.open(img_path),
@@ -157,7 +160,8 @@ file_names = ["Throttle comparison",
               "Drivers laptimes distribution",
               "Driver Laptimes",
               "Throttle Graphs",
-              "Position changes"]
+              "Position changes",
+              "Driver Analysis"]
 
 event_type = ["FP1", "FP2", "FP3", "SQ", "S", "Q", "R"]
 event_type_FP = ["FP1", "FP2", "FP3"]
