@@ -12,6 +12,12 @@ from ..teamColorPicker import get_driver_color
 import dirOrg
 
 
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " Position changes.png"
+    return location, name
+
 def position_changes(y,r,e):
 
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
@@ -21,6 +27,13 @@ def position_changes(y,r,e):
     # Load the session and create the plot
     session = fastf1.get_session(y, r, e)
     session.load(telemetry=False, weather=False)
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     fig, ax = plt.subplots(figsize=(13, 13))
     # sphinx_gallery_defer_figures
@@ -67,9 +80,7 @@ def position_changes(y,r,e):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " Position changes.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

@@ -8,7 +8,11 @@ from fastf1.core import Laps
 from ..teamColorPicker import get_team_color
 import dirOrg
 
-
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + ' Quali results.png'
+    return location, name
 def QualiResults(y,r,e):
 
     fastf1.plotting.setup_mpl(mpl_timedelta_support=True, color_scheme=None, misc_mpl_mods=False)
@@ -17,10 +21,15 @@ def QualiResults(y,r,e):
     fastf1.Cache.enable_cache('./cache')
     session.load()
 
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     drivers = pd.unique(session.laps['Driver'])
     print(drivers)
-
 
 
     list_fastest_laps = list()
@@ -88,9 +97,7 @@ def QualiResults(y,r,e):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + ' Quali results.png'
+
     plt.savefig(location + "/" + name)
     return location + "/" + name
 

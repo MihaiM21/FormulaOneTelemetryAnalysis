@@ -4,12 +4,25 @@ from matplotlib import pyplot as plt
 import matplotlib.image as mpimg
 import dirOrg
 
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " Tyre strategy.png"
+    return location, name
+
 def StrategyFunc(y,r,e):
 
     session = fastf1.get_session(y, r, e)
     fastf1.Cache.enable_cache('./cache')
     session.load()
     laps = session.laps
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     drivers = session.drivers
     print(drivers)
@@ -75,9 +88,7 @@ def StrategyFunc(y,r,e):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " Tyre strategy.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

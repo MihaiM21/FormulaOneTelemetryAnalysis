@@ -8,6 +8,11 @@ import matplotlib.image as mpimg
 import dirOrg
 from ..teamColorPicker import get_driver_color
 
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " Throttle comparison.png"
+    return location, name
 def ThrottleComp(y,r,e):  
 
     fastf1.plotting.setup_mpl(misc_mpl_mods = False)
@@ -21,6 +26,13 @@ def ThrottleComp(y,r,e):
     #Loading session info
     session = fastf1.get_session(year, roundnr, event)
     session.load()
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     drivers = pd.unique(session.laps['Driver'])
 
@@ -69,9 +81,7 @@ def ThrottleComp(y,r,e):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " Throttle comparison.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

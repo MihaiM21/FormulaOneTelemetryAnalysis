@@ -10,8 +10,12 @@ import matplotlib.image as mpimg
 import dirOrg
 from ..teamColorPicker import get_driver_color, get_team_color
 
-
-def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
+def _init(y, r, e, d1, d2, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " " + str(d1) + " vs " + str(d2) + " Fastest Lap Comparison.png"
+    return location, name
+def SpeedTraceFunc(y,r,e,d1,d2):
     
     # enable some matplotlib patches for plotting timedelta values and load
     # FastF1's default color scheme
@@ -20,6 +24,13 @@ def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
     # load a session and its telemetry data
     session = fastf1.get_session(y, r, e)
     session.load()
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, d1, d2, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     ##############################################################################
     # First, we select the two laps that we want to compare
@@ -56,9 +67,7 @@ def SpeedTraceFunc(y,r,e,d1,d2,t1,t2):
 
     plt.suptitle('Fastest Lap Comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " " + str(d1) + " vs " + str(d2) + " Fastest Lap Comparison.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

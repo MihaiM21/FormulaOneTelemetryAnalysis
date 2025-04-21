@@ -12,6 +12,12 @@ from ..teamColorPicker import team_colors, teams
 
 fastf1.plotting.setup_mpl(mpl_timedelta_support=False, misc_mpl_mods=False)
 
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " Team pace.png"
+    return location, name
+
 def TeamPaceRankingFunc(y,r,e):
 
 
@@ -19,10 +25,19 @@ def TeamPaceRankingFunc(y,r,e):
     event = r
     tip = e
 
+
+
     session = fastf1.get_session(year, event, tip)
     fastf1.Cache.enable_cache('./cache')
     session.load()
     laps = session.laps.pick_quicklaps()
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     ###############################################################################
     # Convert the lap time column from timedelta to integer.
@@ -73,9 +88,7 @@ def TeamPaceRankingFunc(y,r,e):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " Team pace.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name

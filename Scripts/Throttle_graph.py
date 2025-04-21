@@ -81,9 +81,9 @@ def throttle_graph(y,r,e,d1,d2):
 
     plt.suptitle('Throttle graph\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " Throttle graph.png"
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " " + driver1 + " vs " + driver2 + " Throttle graph.png"
     plt.savefig(location + "/" + name)
 
     plt.close()

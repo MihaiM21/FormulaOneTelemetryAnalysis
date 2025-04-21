@@ -11,6 +11,12 @@ from matplotlib import pyplot as plt
 import matplotlib.image as mpimg
 import dirOrg
 
+def _init(y, r, e, d, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = str(y) + " " + session.event['EventName'] + " " + d + " Laptimes.png"
+    return location, name
+
 def DriverLaptimesFunc(y,r,e,d):
 
 
@@ -22,6 +28,13 @@ def DriverLaptimesFunc(y,r,e,d):
 
     session = fastf1.get_session(y, r, e)
     session.load()
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, d, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     # Get all the laps for a single driver.
     # Filter out slow laps as they distort the graph axis.
@@ -65,9 +78,7 @@ def DriverLaptimesFunc(y,r,e,d):
     logo = mpimg.imread('lib/logo mic.png')
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = str(y) + " " + session.event['EventName'] + " " + d + " Laptimes.png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name
