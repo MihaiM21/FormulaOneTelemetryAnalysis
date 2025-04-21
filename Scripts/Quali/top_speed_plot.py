@@ -9,6 +9,12 @@ import matplotlib.image as mpimg
 import dirOrg
 from ..teamColorPicker import team_colors, teams
 
+
+def _init(y, r, e, session):
+    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
+    location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
+    name = 'Top speed comparison ' + str(y) + " " + session.event['EventName'] + ' ' + session.name + " .png"
+    return location, name
 def TopSpeedFunc(y, r, e):
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
     fastf1.Cache.enable_cache('./cache')
@@ -18,6 +24,13 @@ def TopSpeedFunc(y, r, e):
 
     session = fastf1.get_session(year, roundnr, event)
     session.load()
+
+    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    location, name = _init(y, r, e, session)
+    path = dirOrg.checkForFile(location, name)
+    if (path != "NULL"):
+        return path
+    # Pana aici
 
     teams = pd.unique(session.laps['Team'])
     session.laps.pick_driver('VER').pick_fastest().get_car_data()
@@ -74,9 +87,7 @@ def TopSpeedFunc(y, r, e):
     fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
     plt.suptitle('Top speed comparison\n' + str(y) + " " + session.event['EventName'] + ' ' + session.name)
 
-    dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'])
-    location = "plots/" + str(y) + "/" + session.event['EventName']
-    name = 'Top speed comparison ' + str(y) + " " + session.event['EventName'] + ' ' + session.name + " .png"
+
     plt.savefig(location + "/" + name)
 
     return location + "/" + name
