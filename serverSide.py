@@ -14,6 +14,7 @@ from Scripts.Throttle_graph import throttle_graph
 from Scripts.Race.plot_position_changes import position_changes
 from Scripts.tokenFolder.token_checker import verify_token
 from Scripts.tokenFolder.token_checker import delete_token
+from Scripts.Complex.driver_analysis import driver_analysis
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -73,6 +74,8 @@ def generate_plot():
             img_path = throttle_graph(int(year), int(round_number), event_type, driver1, driver2)
         elif plot_type == 'Position changes':
             img_path = position_changes(int(year), int(round_number), event_type)
+        elif plot_type == 'Driver analysis':
+            img_path = driver_analysis(int(year), int(round_number), event_type, driver1)
         else:
             logging.warning("Invalid plot type")
             return jsonify({"error": "Invalid plot type"}), 400
