@@ -63,7 +63,7 @@ def generate_plot():
         elif plot_type == 'Drivers track comparison':
             img_path = TrackCompFunc(int(year), int(round_number), event_type, driver1, driver2, team1, team2)
         elif plot_type == 'Speed trace':
-            img_path = SpeedTraceFunc(int(year), int(round_number), event_type, driver1, driver2, team1, team2)
+            img_path = SpeedTraceFunc(int(year), int(round_number), event_type, driver1, driver2)
         elif plot_type == 'Team pace':
             img_path = TeamPaceRankingFunc(int(year), int(round_number), event_type)
         elif plot_type == 'Drivers laptimes distribution':
