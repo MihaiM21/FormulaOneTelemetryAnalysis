@@ -6,58 +6,82 @@ import matplotlib.ticker as ticker
 import numpy as np
 import dirOrg
 import matplotlib.image as mpimg
+from matplotlib.patches import Patch
+import matplotlib.colors as mcolors
+
 def _init(y, r, e, session):
     dirOrg.checkForFolder(str(y) + "/" + session.event['EventName'] + "/" + e)
     location = "plots/" + str(y) + "/" + session.event['EventName'] + "/" + e
     name = 'Simple Stint Laptimes ' + str(y) + " " + session.event['EventName'] + ' ' + session.name + " .png"
     return location, name
 
+def generate_shades(base_color, n_shades):
+    """Genereaza n nuanțe din culoarea de bază prin ajustarea luminozității."""
+    base_rgb = np.array(mcolors.to_rgb(base_color))
+    shades = []
+
+    for i in range(n_shades):
+        factor = 1 - (i / max(n_shades - 1, 1)) * 0.5  # variaza între 1.0 și 0.5
+        shaded_rgb = np.clip(base_rgb * factor, 0, 1)
+        shades.append(mcolors.to_hex(shaded_rgb))
+
+    return shades
 
 def stint_laptimes_simple(y, r, e):
-
-    # Setup
     fastf1.plotting.setup_mpl(misc_mpl_mods=False)
-    #plt.style.use('dark_background')
     fastf1.Cache.enable_cache('./cache')
 
     # Load session
-    year = y
-    race = r
-    session = fastf1.get_session(year, race, e)
+    session = fastf1.get_session(y, r, e)
     session.load()
 
-    # Verifică dacă folderul pentru ploturi există si daca exista si plotul deja generat
+    # Verifica dacă plotul exista deja
     location, name = _init(y, r, e, session)
     path = dirOrg.checkForFile(location, name)
-    if (path != "NULL"):
+    if path != "NULL":
         return path
-    # Pana aici
 
-    # Lista cu piloți
+    # Lista cu piloti
     drivers = ['HAM', 'LEC', 'VER', 'NOR', 'PIA', 'RUS', 'ANT', 'TSU']
-    compound_colors = fastf1.plotting.COMPOUND_COLORS
+    compound_base = fastf1.plotting.COMPOUND_COLORS
+
+    # Determina stinturile per compus
+    compound_stints = {'SOFT': set(), 'MEDIUM': set(), 'HARD': set()}
+    for drv in drivers:
+        laps = session.laps.pick_driver(drv)
+        for _, lap in laps.iterrows():
+            if pd.notna(lap['Stint']) and pd.notna(lap['Compound']):
+                compound_stints[lap['Compound'].upper()].add(int(lap['Stint']))
+
+    # Genereaza nuanțe per compus
+    compound_color_map = {}
+    for compound in ['SOFT', 'MEDIUM', 'HARD']:
+        stints_sorted = sorted(compound_stints[compound])
+        shades = generate_shades(compound_base[compound], len(stints_sorted))
+        compound_color_map[compound] = {
+            stint: shade for stint, shade in zip(stints_sorted, shades)
+        }
 
     # Setup plot
     fig, ax = plt.subplots(figsize=(20, 10))
-
-    xticks = []
-    xticklabels = []
+    xticks, xticklabels = [], []
 
     for i, drv in enumerate(drivers):
         driver_laps = session.laps.pick_driver(drv)
         driver_laps = driver_laps[driver_laps['LapTime'].notna()]
         x_base = i
 
-        for idx, lap in driver_laps.iterrows():
+        for _, lap in driver_laps.iterrows():
             lap_time = lap['LapTime'].total_seconds()
-            stint_number = int(lap['Stint']) if not pd.isna(lap['Stint']) else '?'
-            compound = lap['Compound']
-            color = compound_colors.get(compound, 'gray')
+            stint_number = int(lap['Stint']) if not pd.isna(lap['Stint']) else None
+            compound = lap['Compound'].upper() if isinstance(lap['Compound'], str) else None
 
-            # Offset aleatoriu pentru spațiere vizuală
+            if stint_number is None or compound not in compound_color_map:
+                continue
+
+            color = compound_color_map[compound].get(stint_number, '#888888')
             x_jittered = x_base + np.random.uniform(-0.2, 0.2)
 
-            # Bulina
             ax.scatter(
                 x_jittered, lap_time,
                 color=color,
@@ -65,17 +89,6 @@ def stint_laptimes_simple(y, r, e):
                 edgecolors='black',
                 linewidths=0.5,
                 zorder=3
-            )
-
-            # Text cu numărul stintului
-            ax.text(
-                x_jittered, lap_time,
-                str(stint_number),
-                color='black',
-                fontsize=9,
-                ha='center',
-                va='center',
-                zorder=4
             )
 
         xticks.append(x_base)
@@ -88,7 +101,6 @@ def stint_laptimes_simple(y, r, e):
         return f"{m}:{s:05.2f}"
 
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(format_time))
-    # ax.invert_yaxis()
     ax.set_xticks(xticks)
     ax.set_xticklabels(xticklabels, fontsize=10)
     ax.set_ylabel("Lap Time [s]")
@@ -97,16 +109,20 @@ def stint_laptimes_simple(y, r, e):
     ax.grid(True, linestyle='--', alpha=0.3)
     plt.tight_layout()
 
-    # Adding Watermark
+    # Legend
+    # legend_patches = []
+    # for compound, stint_colors in compound_color_map.items():
+    #     for stint_num, color in stint_colors.items():
+    #         label = f"{compound.title()} - Stint {stint_num}"
+    #         patch = Patch(facecolor=color, edgecolor='black', label=label)
+    #         legend_patches.append(patch)
+    #
+    # ax.legend(handles=legend_patches, loc='upper right', fontsize=8, title="Stint Colors", ncol=1)
+
+    # Watermark
     logo = mpimg.imread('lib/logo mic.png')
-    fig.figimage(logo, 575, 575, zorder=3, alpha=.6)
+    fig.figimage(logo, 975, 425, zorder=3, alpha=.6)
 
+    # Salvare imagine
     plt.savefig(location + "/" + name)
-
     return location + "/" + name
-
-    plt.show()
-
-stint_laptimes_simple(2025, 12 ,"FP1")
-
-
